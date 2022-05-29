@@ -2,7 +2,7 @@ import express from 'express';
 import { graphqlHTTP } from 'express-graphql';
 import cors from 'cors';
 import { schema } from './Schema'
-import { sequelize } from './Models';
+// import { sequelize } from './Models';
 
 const main = async () => {
     const app = express();
@@ -17,8 +17,8 @@ const main = async () => {
         }),
       );
 
-    await sequelize.sync()
-    console.log("All models synced to database successfully");
+    // await sequelize.sync()
+    // console.log("All models synced to database successfully");
 
     const portNum = 3001;
     app.listen(portNum, () => {
