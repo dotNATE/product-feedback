@@ -15,6 +15,7 @@ interface UserInstance
     extends Model<UserAttributes, UserCreationAttributes>, UserAttributes{
         createdAt?: Date;
         updatedAt?: Date;
+        deletedAt?: Date;
     }
 
 const User = sequelize.define<UserInstance>(
@@ -40,7 +41,10 @@ const User = sequelize.define<UserInstance>(
             allowNull: false,
             type: DataTypes.TEXT,
         },
-    }
+    },
+    {
+        paranoid: true,
+    },
 );
 
 export default User;
