@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { CREATE_USER } from '../graphql/Mutation';
+import { createUserMutation } from '../graphql/mutations';
 import { useMutation } from '@apollo/client';
 
 export const CreateUser = () => {
@@ -8,7 +8,7 @@ export const CreateUser = () => {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
   
-    const [createUser] = useMutation(CREATE_USER);
+    const [createUser] = useMutation(createUserMutation);
   
     return (
       <div>
