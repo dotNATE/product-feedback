@@ -3,7 +3,8 @@ import { sequelize } from '.'
 
 interface UserAttributes {
     id: string,
-    name: string,
+    firstName: string,
+    lastName: string,
     username: string,
     password: string,
 }
@@ -28,8 +29,12 @@ const User = sequelize.define<UserInstance>(
             type: DataTypes.UUID,
             defaultValue: DataTypes.UUIDV4,
             unique: true,
-          },
-        name: {
+        },
+        firstName: {
+            allowNull: false,
+            type: DataTypes.TEXT,
+        },
+        lastName: {
             allowNull: false,
             type: DataTypes.TEXT,
         },

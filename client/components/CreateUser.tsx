@@ -3,7 +3,8 @@ import { CREATE_USER } from '../graphql/Mutation';
 import { useMutation } from '@apollo/client';
 
 export const CreateUser = () => {
-    const [name, setName] = useState('');
+    const [firstName, setFirstName] = useState('');
+    const [lastName, setLastName] = useState('');
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
   
@@ -13,12 +14,14 @@ export const CreateUser = () => {
       <div>
         <h1>Create a User</h1>
         <div className='createUser'>
-          <input type="text" placeholder='name' onChange={(e) => setName(e.target.value)}/>
+          <input type="text" placeholder='first name' onChange={(e) => setFirstName(e.target.value)}/>
+          <input type="text" placeholder='last name' onChange={(e) => setLastName(e.target.value)}/>
           <input type="text" placeholder='username' onChange={(e) => setUsername(e.target.value)}/>
           <input type="text" placeholder='password' onChange={(e) => setPassword(e.target.value)}/>
           <button onClick={() => createUser({ 
             variables: {
-              name,
+              firstName,
+              lastName,
               username,
               password
             },

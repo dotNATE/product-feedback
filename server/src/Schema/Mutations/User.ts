@@ -6,14 +6,15 @@ import { MessageType } from "../TypeDefs/Messages";
 export const CREATE_USER = {
     type: UserType,
     args: {
-        name: { type: GraphQLString },
+        firstName: { type: GraphQLString },
+        lastName: { type: GraphQLString },
         username: { type: GraphQLString },
         password: { type: GraphQLString },
     },
     resolve(_: any, args: any) {
-        const { name, username, password } = args;
+        const { firstName, lastName, username, password } = args;
 
-        const newUser = User.create({ name, username, password });
+        const newUser = User.create({ firstName, lastName, username, password });
 
         return newUser;
     },
