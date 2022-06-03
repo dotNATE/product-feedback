@@ -15,9 +15,11 @@ const main = async () => {
       '/graphql',
       graphqlHTTP((request) => ({
         schema,
-        graphiql: true,
         context: {
-          request
+          authToken: request.headers.authorization
+        },
+        graphiql: {
+          headerEditorEnabled: true,
         },
       })),
     );

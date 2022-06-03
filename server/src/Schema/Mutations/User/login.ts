@@ -21,17 +21,13 @@ const loginWithEmail = {
             },
         });
 
-        if (!user) {
-            throw new Error("No account found for that email");
-        }
+        if (!user) throw new Error("No account found for that email");
 
         const isPasswordValid: boolean = await bcrypt.compare(password, user.password);
 
-        if (!isPasswordValid) {
-            throw new Error("Incorrect password");
-        }
+        if (!isPasswordValid) throw new Error("Incorrect password");
 
-        const accessToken: string = jwt.sign({ email: email }, String(ACCESS_TOKEN_SECRET), { expiresIn: String(ACCESS_TOKEN_EXPIRY)});
+        const accessToken: string = jwt.sign({ userID: user.id }, String(ACCESS_TOKEN_SECRET), { expiresIn: String(ACCESS_TOKEN_EXPIRY)});
 
         return { token: accessToken };
     },

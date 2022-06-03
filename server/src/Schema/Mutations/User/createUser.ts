@@ -23,9 +23,7 @@ const createUser = {
             },
         });
 
-        if (userByEmailCheck) {
-            throw new Error("This email address is already in use");
-        }
+        if (userByEmailCheck) throw new Error("This email address is already in use");
 
         const userByUsernameCheck = await User.findOne({
             where: {
@@ -33,9 +31,7 @@ const createUser = {
             },
         });
 
-        if (userByUsernameCheck) {
-            throw new Error("This username is already in use");
-        }
+        if (userByUsernameCheck) throw new Error("This username is already in use");
 
         const passwordHash: string = await bcrpyt.hash(password, Number(BCRYPT_ROUNDS));
         const newUser = await User.create({ firstName, lastName, email, username, password: passwordHash });

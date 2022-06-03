@@ -3,6 +3,7 @@ import { User } from "../../../Models";
 import { MessageType } from "../../TypeDefs";
 
 const bcrypt = require('bcrypt');
+import jwt from "jsonwebtoken";
 
 export const updatePassword = {
     type: MessageType,
@@ -11,12 +12,13 @@ export const updatePassword = {
         oldPassword: { type: GraphQLString },
         newPassword: { type: GraphQLString },
     },
-    async resolve(_: any, args: any) {
+    async resolve(_: any, args: any, context: any) {
         const { username, oldPassword, newPassword } = args;
-        const { BCRYPT_ROUNDS } = process.env;
+        const { BCRYPT_ROUNDS, ACCESS_TOKEN_SECRET } = process.env;
+        const { authToken } = context;
 
         if (oldPassword === newPassword) {
-            throw new Error("Your new password must be different from your old password")
+            throw new Error("Your new password must be different from your old password");
         }
 
         const user = await User.findOne({
@@ -25,17 +27,17 @@ export const updatePassword = {
             },
         });
 
-        if (!user) {
-            throw new Error("User doesn't exist");
-        }
+        if (!user) throw new Error("User doesn't exist");
+
+        jwt.verify(authToken, String(ACCESS_TOKEN_SECRET), (error: any) => {
+            if (error) throw new Error(error);
+        });
         
         const isPasswordValid: boolean = await bcrypt.compare(oldPassword, user.password);
 
-        if (!isPasswordValid) {
-            throw new Error("Passwords do not match");
-        }
+        if (!isPasswordValid) throw new Error("Passwords do not match");
 
-        const newPasswordHash: string = await bcrypt.hash(newPassword, Number(BCRYPT_ROUNDS))
+        const newPasswordHash: string = await bcrypt.hash(newPassword, Number(BCRYPT_ROUNDS));
 
         await User.update({ password: newPasswordHash }, {
             where: {
