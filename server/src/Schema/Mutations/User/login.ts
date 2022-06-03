@@ -27,7 +27,7 @@ const loginWithEmail = {
 
         if (!isPasswordValid) throw new Error("Incorrect password");
 
-        const accessToken: string = jwt.sign({ userID: user.id }, String(ACCESS_TOKEN_SECRET), { expiresIn: String(ACCESS_TOKEN_EXPIRY)});
+        const accessToken: string = jwt.sign({ userId: user.id }, String(ACCESS_TOKEN_SECRET), { expiresIn: String(ACCESS_TOKEN_EXPIRY)});
 
         return { token: accessToken };
     },
