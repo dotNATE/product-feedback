@@ -1,6 +1,7 @@
 import { GraphQLString } from "graphql";
-import User from "../../../Models/User";
+import { User } from "../../../Models";
 import { AuthTokenType } from "../../TypeDefs";
+
 import jwt from 'jsonwebtoken';
 const bcrypt = require('bcrypt');
 

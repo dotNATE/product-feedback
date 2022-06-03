@@ -1,5 +1,5 @@
 import { GraphQLString } from "graphql";
-import User from "../../../Models/User";
+import { User } from "../../../Models";
 import { MessageType } from "../../TypeDefs";
 
 export const updatePassword = {
