@@ -4,7 +4,7 @@ import express from 'express';
 import { graphqlHTTP } from 'express-graphql';
 import cors from 'cors';
 import { schema } from './Schema'
-// import { sequelize } from './Models';
+// import { sequelize } from './Models/sequelize';
 
 const main = async () => {
     const app = express();
@@ -13,10 +13,13 @@ const main = async () => {
 
     app.use(
       '/graphql',
-      graphqlHTTP({
+      graphqlHTTP((request) => ({
         schema,
         graphiql: true,
-      }),
+        context: {
+          request
+        },
+      })),
     );
 
     // sequelize.sync();

@@ -13,6 +13,7 @@ const loginWithEmail = {
     },
     async resolve (_: any, args: any) {
         const { email, password } = args;
+        const { ACCESS_TOKEN_SECRET, ACCESS_TOKEN_EXPIRY } = process.env;
 
         const user = await User.findOne({
             where: {
@@ -30,8 +31,7 @@ const loginWithEmail = {
             throw new Error("Incorrect password");
         }
 
-        const accessTokenSecret: string = process.env.ACCESS_TOKEN_SECRET || 'fallback';
-        const accessToken: string = jwt.sign({ email: email }, accessTokenSecret, { expiresIn: '30m'});
+        const accessToken: string = jwt.sign({ email: email }, String(ACCESS_TOKEN_SECRET), { expiresIn: String(ACCESS_TOKEN_EXPIRY)});
 
         return { token: accessToken };
     },

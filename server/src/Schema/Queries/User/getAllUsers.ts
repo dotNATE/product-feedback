@@ -1,5 +1,5 @@
 import { GraphQLList } from "graphql"
-import User from "../../../Models/User";
+import { User } from "../../../Models";
 import { UserType } from "../../TypeDefs"
 
 const getAllUsers = {
