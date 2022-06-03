@@ -5,6 +5,7 @@ interface UserAttributes {
     id: string,
     firstName: string,
     lastName: string,
+    email: string,
     username: string,
     password: string,
 }
@@ -35,6 +36,10 @@ const User = sequelize.define<UserInstance>(
             type: DataTypes.TEXT,
         },
         lastName: {
+            allowNull: false,
+            type: DataTypes.TEXT,
+        },
+        email: {
             allowNull: false,
             type: DataTypes.TEXT,
         },

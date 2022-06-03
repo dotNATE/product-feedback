@@ -1,3 +1,5 @@
+import 'dotenv/config';
+
 import express from 'express';
 import { graphqlHTTP } from 'express-graphql';
 import cors from 'cors';
@@ -6,22 +8,21 @@ import { schema } from './Schema'
 
 const main = async () => {
     const app = express();
-
     app.use(cors());
     app.use(express.json());
+
     app.use(
-        '/graphql',
-        graphqlHTTP({
-          schema,
-          graphiql: true,
-        }),
-      );
+      '/graphql',
+      graphqlHTTP({
+        schema,
+        graphiql: true,
+      }),
+    );
 
     // sequelize.sync();
 
-    const portNum = 3001;
-    app.listen(portNum, () => {
-        console.log(`Server running on port ${portNum}`);
+    app.listen(process.env.PORT_NUM, () => {
+      console.log(`Server running on port ${process.env.PORT_NUM}`);
     });
 };
 
