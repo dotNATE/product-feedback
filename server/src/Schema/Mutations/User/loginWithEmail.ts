@@ -12,6 +12,7 @@ const loginWithEmail = {
         password: { type: GraphQLString },
     },
     async resolve (_: any, args: any) {
+        console.log('loginWithEmail invoked with: ', args);
         const { email, password } = args;
         const { ACCESS_TOKEN_SECRET, ACCESS_TOKEN_EXPIRY } = process.env;
 

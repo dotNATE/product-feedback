@@ -3,6 +3,8 @@ import { Formik, Form } from 'formik';
 import { useMutation } from '@apollo/client';
 import { useRouter } from 'next/router';
 import styled from '@emotion/styled';
+import { useAppDispatch, useAppSelector } from '../../store/hooks';
+import { login as reduxLogin, selectAuthenticated, selectToken } from '../../store/auth';
 
 import { loginWithEmailMutation } from '../../graphql/mutations';
 
@@ -22,13 +24,18 @@ const initialValues: Values = {
 };
 
 const Login: React.FC = ({}) => {
+    const dispatch = useAppDispatch();
     const router = useRouter();
+    const authenticated = useAppSelector(selectAuthenticated);
+    const token = useAppSelector(selectToken);
 
-    const [login, { error, loading }] = useMutation(loginWithEmailMutation, {
+    const [login, { error }] = useMutation(loginWithEmailMutation, {
         onCompleted: (data): void => {
             const token = data.loginWithEmail.token;
             sessionStorage.setItem('token', token);
-            router.push('/');
+            dispatch(reduxLogin({ token: token }));
+            console.log('finidhes');
+            // router.push('/');
         },
         onError: (err) => {
             console.error(err);
@@ -63,6 +70,8 @@ const Login: React.FC = ({}) => {
                 onSubmit={handleSubmit}
             >
                 <StyledForm>
+                    { authenticated && <div>You are logged in</div>}
+                    <div>Your token is: { token }</div>
                     {error && <FormErrorMessage>{error.message}.</FormErrorMessage>}
 
                     <InputField label='Email' name='email' type='email' description='The email address you used to sign up.' />

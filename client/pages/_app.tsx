@@ -2,6 +2,8 @@ import '../styles/styles.css';
 import type { AppProps } from 'next/app';
 import { ApolloClient, ApolloProvider, InMemoryCache, createHttpLink } from '@apollo/client';
 import { useEffect, useState } from 'react';
+import { Provider as ReduxProvider } from 'react-redux';
+import { store } from '../store/index';
 
 function MyApp({ Component, pageProps }: AppProps) {
   const [token, setToken] = useState('');
@@ -26,9 +28,11 @@ function MyApp({ Component, pageProps }: AppProps) {
   });
 
   return (
-    <ApolloProvider client={client}>
-      <Component {...pageProps} />
-    </ApolloProvider>
+    <ReduxProvider store={store}>
+      <ApolloProvider client={client}>
+        <Component {...pageProps} />
+      </ApolloProvider>
+    </ReduxProvider>
   );
 };
 

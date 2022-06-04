@@ -10,6 +10,7 @@ const deleteUser = {
         id: { type: GraphQLID },
     },
     async resolve(_: any, args: any, context: any) {
+        console.log('deleteUser invoked with: ', args);
         const { id } = args;
         const { ACCESS_TOKEN_SECRET } = process.env;
         const { authToken } = context;

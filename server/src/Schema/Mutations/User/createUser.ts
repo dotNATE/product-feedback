@@ -14,6 +14,7 @@ const createUser = {
         password: { type: GraphQLString },
     },
     async resolve(_: any, args: any) {
+        console.log('createUser invoked with: ', args);
         const { firstName, lastName, email, username, password } = args;
         const { BCRYPT_ROUNDS } = process.env;
 

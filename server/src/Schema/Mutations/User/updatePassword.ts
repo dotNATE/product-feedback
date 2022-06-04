@@ -13,6 +13,7 @@ export const updatePassword = {
         newPassword: { type: GraphQLString },
     },
     async resolve(_: any, args: any, context: any) {
+        console.log('updatePassword invoked with: ', args);
         const { username, oldPassword, newPassword } = args;
         const { BCRYPT_ROUNDS, ACCESS_TOKEN_SECRET } = process.env;
         const { authToken } = context;
