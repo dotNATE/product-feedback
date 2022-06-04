@@ -10,6 +10,7 @@ const loginWithEmail = gql`
             password: $password
             ) {
             token
+            id
         }
     }
 `;

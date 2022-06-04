@@ -30,7 +30,7 @@ const loginWithEmail = {
 
         const accessToken: string = jwt.sign({ userId: user.id }, String(ACCESS_TOKEN_SECRET), { expiresIn: String(ACCESS_TOKEN_EXPIRY)});
 
-        return { token: accessToken };
+        return { token: accessToken, id: user.id };
     },
 };
 

@@ -4,7 +4,7 @@ import { useMutation } from '@apollo/client';
 import { useRouter } from 'next/router';
 import styled from '@emotion/styled';
 import { useAppDispatch, useAppSelector } from '../../store/hooks';
-import { login as reduxLogin, selectAuthenticated, selectToken } from '../../store/auth';
+import { login as reduxLogin, selectAuthenticated } from '../../store/auth';
 
 import { loginWithEmailMutation } from '../../graphql/mutations';
 
@@ -27,15 +27,14 @@ const Login: React.FC = ({}) => {
     const dispatch = useAppDispatch();
     const router = useRouter();
     const authenticated = useAppSelector(selectAuthenticated);
-    const token = useAppSelector(selectToken);
+
+    if (authenticated) router.push('/');
 
     const [login, { error }] = useMutation(loginWithEmailMutation, {
         onCompleted: (data): void => {
             const token = data.loginWithEmail.token;
-            sessionStorage.setItem('token', token);
-            dispatch(reduxLogin({ token: token }));
-            console.log('finidhes');
-            // router.push('/');
+            const id = data.loginWithEmail.id;
+            dispatch(reduxLogin({ token, id }));
         },
         onError: (err) => {
             console.error(err);
@@ -70,8 +69,6 @@ const Login: React.FC = ({}) => {
                 onSubmit={handleSubmit}
             >
                 <StyledForm>
-                    { authenticated && <div>You are logged in</div>}
-                    <div>Your token is: { token }</div>
                     {error && <FormErrorMessage>{error.message}.</FormErrorMessage>}
 
                     <InputField label='Email' name='email' type='email' description='The email address you used to sign up.' />

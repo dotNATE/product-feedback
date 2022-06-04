@@ -5,20 +5,23 @@ import type { RootState } from '../store/index';
 export type AuthState = {
     authenticated: boolean;
     token: string;
+    id: string;
 };
 
 const initialState: AuthState = {
     authenticated: false,
     token: '',
+    id: '',
 };
 
 export const authSlice = createSlice({
     name: 'auth',
     initialState,
     reducers: {
-        login: (state, action) => {
+        login: (state, { payload }) => {
             state.authenticated = true;
-            state.token = action.payload.token;
+            state.token = payload.token;
+            state.id = payload.id;
         },
     },
 });
