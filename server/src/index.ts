@@ -4,7 +4,7 @@ import express from 'express';
 import { graphqlHTTP } from 'express-graphql';
 import cors from 'cors';
 import { schema } from './Schema'
-// import { sequelize } from './Models/sequelize';
+import { sequelize } from './Models/sequelize';
 
 const main = async () => {
     const app = express();
@@ -23,7 +23,7 @@ const main = async () => {
         },
       }),
     ));
-    // sequelize.sync();
+    sequelize.sync();
 
     app.listen(process.env.PORT_NUM, () => {
       console.log(`Server running on port ${process.env.PORT_NUM}`);

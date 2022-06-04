@@ -1,3 +1,4 @@
 import User from './User';
+import Feedback from './Feedback';
 
-export { User };
+export { User, Feedback };

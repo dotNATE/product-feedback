@@ -3,6 +3,9 @@ import { sequelize } from './sequelize'
 
 interface FeedbackAttributes {
     id: string,
+    title: string,
+    category: string,
+    detail: string,
 }
 
 interface FeedbackCreationAttributes
@@ -25,6 +28,18 @@ const Feedback = sequelize.define<FeedbackInstance>(
             type: DataTypes.UUID,
             defaultValue: DataTypes.UUIDV4,
             unique: true,
+        },
+        title: {
+            allowNull: false,
+            type: DataTypes.TEXT,
+        },
+        category: {
+            allowNull: false,
+            type: DataTypes.TEXT,
+        },
+        detail: {
+            allowNull: false,
+            type: DataTypes.TEXT,
         },
     },
     {
