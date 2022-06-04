@@ -4,7 +4,7 @@ import styled from '@emotion/styled';
 const Body = styled.body({
   height: '100vh',
   width: '100%',
-  backgroundColor: '#F2F4FF',
+  backgroundColor: 'rgb(242, 244, 255)',
   margin: 0,
 });
 

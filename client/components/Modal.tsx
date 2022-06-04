@@ -2,7 +2,7 @@ import React, { ReactNode } from 'react'
 import styled from '@emotion/styled'
 
 type Props = {
-    children: ReactNode,
+    children: ReactNode | ReactNode[],
 }
 
 const ModalBackground = styled.div({
@@ -19,7 +19,7 @@ const Modal = styled.div({
     display: 'flex',
     flexDirection: 'column',
     justifyContent: 'center',
-    padding: '4rem',
+    padding: '3.5rem 4rem',
     backgroundColor: 'white',
     borderRadius: '10px',
 });
