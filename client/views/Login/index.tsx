@@ -1,6 +1,7 @@
 import React from 'react';
 import { Formik, Form } from 'formik';
 import { useMutation } from '@apollo/client';
+import { useRouter } from 'next/router';
 import styled from '@emotion/styled';
 
 import { loginWithEmailMutation } from '../../graphql/mutations';
@@ -13,7 +14,7 @@ import ButtonContainer from '../../components/buttons/ButtonContainer';
 interface Values {
     email: string;
     password: string;
-}
+};
 
 const initialValues: Values = {
     email: 'nathielpayne+5@test.com',
@@ -21,9 +22,16 @@ const initialValues: Values = {
 };
 
 const Login: React.FC = ({}) => {
+    const router = useRouter();
+
     const [login, { error, loading }] = useMutation(loginWithEmailMutation, {
         onCompleted: (data): void => {
-            alert(JSON.stringify(data, null, 2));
+            const token = data.loginWithEmail.token;
+            sessionStorage.setItem('token', token);
+            router.push('/');
+        },
+        onError: (err) => {
+            console.error(err);
         },
     });
     
@@ -45,7 +53,7 @@ const Login: React.FC = ({}) => {
 
     const FormErrorMessage = styled.p`
         color: rgb(215, 55, 55);
-    `
+    `;
 
     return (
         <Modal>

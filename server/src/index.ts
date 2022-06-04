@@ -16,14 +16,13 @@ const main = async () => {
       graphqlHTTP((request) => ({
         schema,
         context: {
-          authToken: request.headers.authorization
+          authToken: request.headers.authorization,
         },
         graphiql: {
           headerEditorEnabled: true,
         },
-      })),
-    );
-
+      }),
+    ));
     // sequelize.sync();
 
     app.listen(process.env.PORT_NUM, () => {
