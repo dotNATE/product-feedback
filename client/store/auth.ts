@@ -1,5 +1,4 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { string } from 'yup';
 import type { RootState } from '../store/index';
 
 export type AuthState = {
