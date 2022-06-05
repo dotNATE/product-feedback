@@ -1,13 +1,16 @@
-import React from "react";
+import { useRouter } from "next/router";
 
 import ButtonContainer from "../../buttons/ButtonContainer";
 import Button from "../../buttons/Button";
 
-type Props = {
-    handleGoToRegister?: (event: React.MouseEvent<HTMLButtonElement>) => void,
-};
+const LoginButtons: React.FC = ({}) => {
+    const router = useRouter();
 
-const LoginButtons: React.FC<Props> = ({ handleGoToRegister }) => {
+    const handleGoToRegister = (e: React.MouseEvent<HTMLButtonElement>): void => {
+        e.preventDefault();
+        router.push('/register');
+    };
+
     return (
         <ButtonContainer>
             <Button label='Go to register' onClick={handleGoToRegister} />
