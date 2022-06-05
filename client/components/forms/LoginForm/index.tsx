@@ -24,6 +24,7 @@ const LoginForm: React.FC = () => {
         onCompleted: (data): void => {
             const token = data.loginWithEmail.token;
             const id = data.loginWithEmail.id;
+            sessionStorage.setItem('token', token)
             dispatch(reduxLogin({ token, id }));
         },
         onError: (err) => {
