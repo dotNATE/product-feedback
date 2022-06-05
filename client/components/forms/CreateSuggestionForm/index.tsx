@@ -1,15 +1,15 @@
 import React from 'react';
 import { useMutation } from '@apollo/client';
+import { createSuggestionsMutation } from '../../../graphql/mutations';
+
 import { useAppDispatch } from '../../../store/hooks';
 import { closeCreateSuggestion } from '../../../store/suggestion';
 import { client } from '../../../pages/_app';
 
-import { createSuggestionsMutation } from '../../../graphql/mutations';
-
 import ModalForm from '../FormWrapper';
 import CreateSuggestionButtons from './CreateSuggestionButtons';
 import CreateSuggestionInputs from './CreateSuggestionInputs';
-import getAllSuggestion from '../../../graphql/queries/suggestions/getAllSuggestions';
+import getAllSuggestions from '../../../graphql/queries/suggestions/getAllSuggestions';
 
 interface Values {
     title: string;
@@ -28,7 +28,7 @@ const CreateSuggestionForm: React.FC = ({}) => {
 
     const [createSuggestion, { error }] = useMutation(createSuggestionsMutation, {
         onCompleted: (data): void => {
-            client.refetchQueries({include: [getAllSuggestion]});
+            client.refetchQueries({ include: [getAllSuggestions] });
             dispatch(closeCreateSuggestion());
         },
         onError: (err) => {
