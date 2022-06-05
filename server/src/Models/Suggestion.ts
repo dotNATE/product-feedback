@@ -1,11 +1,12 @@
 import { DataTypes, Model, Optional } from "sequelize";
-import { sequelize } from './sequelize'
+import { sequelize } from './sequelize';
 
 interface SuggestionAttributes {
     id: string,
     title: string,
     category: string,
     detail: string,
+    createdBy: string,
 }
 
 interface SuggestionCreationAttributes
@@ -40,6 +41,10 @@ const Suggestion = sequelize.define<SuggestionInstance>(
         detail: {
             allowNull: false,
             type: DataTypes.TEXT,
+        },
+        createdBy: {
+            allowNull: false,
+            type: DataTypes.UUID,
         },
     },
     {

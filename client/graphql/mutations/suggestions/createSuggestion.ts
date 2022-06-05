@@ -5,16 +5,19 @@ const createSuggestion = gql`
         $category: String
         $title: String
         $detail: String
+        $createdBy: ID
     ) {
         createSuggestion(
             category: $category
             title: $title
             detail: $detail
+            createdBy: $createdBy
             ) {
                 id
                 title
                 category
                 detail
+                createdBy
             }
         }
 `;

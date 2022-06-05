@@ -7,6 +7,7 @@ const SuggestionType = new GraphQLObjectType({
         title: { type: GraphQLString },
         category: { type: GraphQLString },
         detail: { type: GraphQLString },
+        createdBy: { type: GraphQLID },
     }),
 });
 

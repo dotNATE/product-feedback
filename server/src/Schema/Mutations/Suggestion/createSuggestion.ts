@@ -10,10 +10,11 @@ const createSuggestion = {
         title: { type: GraphQLString },
         category: { type: GraphQLString },
         detail: { type: GraphQLString },
+        createdBy: { type: GraphQLID },
     },
     async resolve(_: any, args: any, context: any) {
         console.log('createSuggestion invoked with: ', args);
-        const { title, category, detail } = args;
+        const { title, category, detail, createdBy } = args;
         const { authToken } = context;
         const { ACCESS_TOKEN_SECRET } = process.env;
 
@@ -25,7 +26,7 @@ const createSuggestion = {
             throw new Error("You must fill in all fields");
         }
 
-        const newSuggestion = await Suggestion.create({ title, category, detail });
+        const newSuggestion = await Suggestion.create({ title, category, detail, createdBy });
 
         return newSuggestion;
     },

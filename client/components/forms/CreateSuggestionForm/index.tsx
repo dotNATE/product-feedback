@@ -2,7 +2,7 @@ import React from 'react';
 import { useMutation } from '@apollo/client';
 import { createSuggestionsMutation } from '../../../graphql/mutations';
 
-import { useAppDispatch } from '../../../store/hooks';
+import { useAppDispatch, useAppSelector } from '../../../store/hooks';
 import { closeCreateSuggestion } from '../../../store/suggestion';
 import { client } from '../../../pages/_app';
 
@@ -10,21 +10,18 @@ import ModalForm from '../FormWrapper';
 import CreateSuggestionButtons from './CreateSuggestionButtons';
 import CreateSuggestionInputs from './CreateSuggestionInputs';
 import getAllSuggestions from '../../../graphql/queries/suggestions/getAllSuggestions';
+import { selectId } from '../../../store/auth';
 
 interface Values {
     title: string;
     category: string;
     detail: string;
-};
-
-const initialValues: Values = {
-    title: '',
-    category: '',
-    detail: '',
+    createdBy: string;
 };
 
 const CreateSuggestionForm: React.FC = ({}) => {
     const dispatch = useAppDispatch();
+    const userId = useAppSelector(selectId);
 
     const [createSuggestion, { error }] = useMutation(createSuggestionsMutation, {
         onCompleted: (data): void => {
@@ -40,6 +37,13 @@ const CreateSuggestionForm: React.FC = ({}) => {
         createSuggestion({
             variables: values,
         });
+    };
+
+    const initialValues: Values = {
+        title: '',
+        category: '',
+        detail: '',
+        createdBy: userId,
     };
 
     return (
