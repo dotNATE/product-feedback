@@ -9,7 +9,7 @@ import Layout from './components/Layout';
 import UtilityBar from './components/UtilityBar';
 import NoSuggestions from './components/NoSuggestions';
 import SuggestionList from './components/SuggestionList';
-import CreateSuggestionForm from '../../components/form/CreateSuggestionForm';
+import CreateSuggestionForm from '../../components/forms/CreateSuggestionForm';
 import Modal from '../../components/Modal';
 
 const Home: React.FC = ({}) => {
