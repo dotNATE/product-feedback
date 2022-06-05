@@ -4,17 +4,19 @@ import { useAppSelector } from '../store/hooks';
 import { useRouter } from 'next/router';
 import { useEffect } from 'react';
 
-const Home: NextPage = () => {
+import Home from '../views/Home';
+
+const HomePage: NextPage = () => {
   const router = useRouter();
   const authenticated = useAppSelector(selectAuthenticated);
 
   useEffect(() => {
     if (!authenticated) router.push('/login');
-  }, [authenticated]);
+  }, [authenticated, router]);
 
   return (
-    <div></div>
+    <Home></Home>
   );
 };
 
-export default Home;
+export default HomePage;
