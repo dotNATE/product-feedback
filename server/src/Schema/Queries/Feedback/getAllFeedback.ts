@@ -6,7 +6,9 @@ const getAllFeedback = {
     type: new GraphQLList(FeedbackType),
     resolve() {
         console.log('getAllFeedback invoked');
-        const feedback = Feedback.findAll();
+        const feedback = Feedback.findAll({
+            order: [['createdAt', 'DESC']]
+        });
 
         return feedback;
     },
