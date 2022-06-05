@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { ReactNode } from 'react';
 import styled, { StyledComponent } from '@emotion/styled';
 
 type Props = {
@@ -6,14 +6,17 @@ type Props = {
     style?: 'submit' | 'cancel' | 'warning' | undefined,
     type?: "button" | "submit" | "reset" | undefined,
     onClick?: (event: React.MouseEvent<HTMLButtonElement>) => void,
+    icon?: ReactNode,
 };
 
-const BaseButton: React.FC<Props> = ({ label, style, type, onClick }) => {
+const BaseButton: React.FC<Props> = ({ label, style, type, onClick, icon }) => {
     const BaseButton = styled.button`
+        display: flex;
         background-color: rgb(58, 67, 116);
         border-radius: 10px;
         border: none;
         padding: .75rem 2rem;
+        gap: .5rem;
         &:hover {
             background-color: rgb(101, 110, 163);
             cursor: pointer;
@@ -56,7 +59,8 @@ const BaseButton: React.FC<Props> = ({ label, style, type, onClick }) => {
             type={type}
             onClick={onClick}
         >
-            <Label>{ label }</Label>
+                { icon }
+                <Label>{ label }</Label>
         </RenderButton>
     );
 };
