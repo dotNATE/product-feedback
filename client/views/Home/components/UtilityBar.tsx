@@ -1,7 +1,6 @@
 import React from 'react';
 import styled from '@emotion/styled';
-import BaseButton from '../../../components/buttons/Button';
-import PlusIcon from './PlusIcon';
+import AddFeedbackButton from '../components/AddFeedbackButton';
 
 const UtilityBar: React.FC = ({}) => {
     const Container = styled.div`
@@ -16,7 +15,7 @@ const UtilityBar: React.FC = ({}) => {
     return (
         <Container>
             <div></div>
-            <BaseButton label='Add Feedback' style='submit' icon={<PlusIcon />} />
+            <AddFeedbackButton />
         </Container>
     );
 };

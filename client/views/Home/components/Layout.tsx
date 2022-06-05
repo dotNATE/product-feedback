@@ -20,7 +20,6 @@ const Layout: React.FC<Props> = ({ primaryColumnContent , secondaryColumnContent
         flex-direction: column;
         gap: 2rem;
         width: 100%;
-        height: 5rem;
         grid-column: 2 / span 3;
     `;
 
