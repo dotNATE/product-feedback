@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from '@emotion/styled';
 import AddFeedbackButton from './components/AddFeedbackButton';
+import LightBulbIcon from './components/LightBulbIcon';
 
 type Props = {
     count: number;
@@ -16,6 +17,11 @@ const UtilityBar: React.FC<Props> = ({ count }) => {
         padding: 0.875rem;
     `;
 
+    const FlexRow = styled.div`
+        display: flex;
+        flex-direction: row;
+    `;
+
     const StyledH3 = styled.h3`
         color: white;
         height: auto;
@@ -24,7 +30,10 @@ const UtilityBar: React.FC<Props> = ({ count }) => {
 
     return (
         <Container>
-            <StyledH3>{ count } Suggestions</StyledH3>
+            <FlexRow>
+                <LightBulbIcon />
+                <StyledH3>{ count } Suggestions</StyledH3>
+            </FlexRow>
             <AddFeedbackButton />
         </Container>
     );

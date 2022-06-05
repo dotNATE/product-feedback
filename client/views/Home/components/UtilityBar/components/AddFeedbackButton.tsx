@@ -2,7 +2,7 @@ import { useAppDispatch } from '../../../../../store/hooks';
 import { openCreateFeedback } from '../../../../../store/feedback';
 
 import Button from '../../../../../components/buttons/Button';
-import PlusIcon from '../../PlusIcon';
+import PlusIcon from '../../../../../components/icons/PlusIcon';
 
 const AddFeedbackButton: React.FC = ({}) => {
     const dispatch = useAppDispatch();
