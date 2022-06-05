@@ -14,7 +14,7 @@ const LoginButtons: React.FC = ({}) => {
     return (
         <ButtonContainer>
             <Button label='Go to register' onClick={handleGoToRegister} />
-            <Button label='Login' style='submit' />
+            <Button label='Login' style='submit' type="submit" />
         </ButtonContainer>
     );
 };

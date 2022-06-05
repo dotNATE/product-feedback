@@ -14,7 +14,7 @@ const CreateFeedbackButtons: React.FC = ({}) => {
     return (
         <ButtonContainer>
             <Button label='Cancel' onClick={handleCloseModal} />
-            <Button label='Add Feedback' style='submit' />
+            <Button label='Add Feedback' style='submit' type='submit' />
         </ButtonContainer>
     );
 };
