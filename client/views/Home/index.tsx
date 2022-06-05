@@ -28,7 +28,7 @@ const Home: React.FC = ({}) => {
     };
 
     const PrimaryColumnContent: ReactNode = <>
-        <UtilityBar />
+        <UtilityBar count={feedback.length} />
         <Feedback />
     </>;
     const SecondaryColumnContent: ReactNode = <div></div>;

@@ -2,7 +2,11 @@ import React from 'react';
 import styled from '@emotion/styled';
 import AddFeedbackButton from '../components/AddFeedbackButton';
 
-const UtilityBar: React.FC = ({}) => {
+type Props = {
+    count: number;
+};
+
+const UtilityBar: React.FC<Props> = ({ count }) => {
     const Container = styled.div`
         display: flex;
         justify-content: space-between;
@@ -12,9 +16,15 @@ const UtilityBar: React.FC = ({}) => {
         padding: 0.875rem;
     `;
 
+    const StyledH3 = styled.h3`
+        color: white;
+        height: auto;
+        margin: auto 0;
+    `;
+
     return (
         <Container>
-            <div></div>
+            <StyledH3>{ count } Suggestions</StyledH3>
             <AddFeedbackButton />
         </Container>
     );
