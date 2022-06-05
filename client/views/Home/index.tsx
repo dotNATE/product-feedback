@@ -1,29 +1,37 @@
-import React, { ReactNode } from 'react';
+import React, { ReactNode, useState } from 'react';
 
 import { useAppSelector } from '../../store/hooks';
-import { selectFeedback, selectCreateFeedback } from '../../store/feedback';
+import { selectCreateFeedback } from '../../store/feedback';
+import { useQuery } from '@apollo/client';
+import { getAllFeedbackQuery } from '../../graphql/queries';
 
 import Layout from './components/Layout';
 import UtilityBar from './components/UtilityBar';
 import NoFeedback from './components/NoFeedback';
+import FeedbackList from './components/FeedbackList';
 import CreateFeedbackForm from '../../components/form/createFeedback/CreateFeedbackForm';
 import Modal from '../../components/Modal';
 
 const Home: React.FC = ({}) => {
-    const feedback = useAppSelector(selectFeedback);
+    const [feedback, setFeedback] = useState([]);
+
+    const { loading } = useQuery(getAllFeedbackQuery, {
+        onCompleted: (data) => {
+            setFeedback(data.getAllFeedback);
+        },
+    });
+
     const createFeedbackOpen = useAppSelector(selectCreateFeedback);
 
     const Feedback: React.FC = () => {
-        return feedback.length > 0 ? <div></div> : <NoFeedback />;
+        return feedback && feedback.length > 0 ? <FeedbackList feedback={feedback} /> : <NoFeedback />;
     };
 
     const PrimaryColumnContent: ReactNode = <>
         <UtilityBar />
         <Feedback />
     </>;
-
     const SecondaryColumnContent: ReactNode = <div></div>;
-
     const Form: ReactNode = createFeedbackOpen ? <Modal><CreateFeedbackForm /></Modal> : null;
 
     return (

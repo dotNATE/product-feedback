@@ -14,9 +14,9 @@ const HomePage: NextPage = () => {
     if (!authenticated) router.push('/login');
   }, [authenticated, router]);
 
-  return (
+  return authenticated ? (
     <Home></Home>
-  );
+  ) : null;
 };
 
 export default HomePage;

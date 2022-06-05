@@ -1,8 +1,19 @@
-import React from "react";
+import Feedback from './Feedback';
+import type { FeedbackType } from './Feedback';
 
-const FeedbackList: React.FC = ({}) => {
+type Props = {
+    feedback: FeedbackType[];
+};
+
+const FeedbackList: React.FC<Props> = ({ feedback }) => {
     return (
-        <div></div>
+        <>
+            {
+                feedback && feedback.map((el) => {
+                    return <Feedback key={ el.id } feedback={el} />
+                })
+            }
+        </>
     );
 };
 
