@@ -52,9 +52,12 @@ const Login: React.FC = ({}) => {
         console.log('event: ', event);
     };
 
-    const StyledForm = styled(Form)`
+    const InputContainer = styled.div`
         display: flex;
         flex-direction: column;
+        gap: 1rem;
+        margin-top: 2rem;
+        margin-bottom: 3rem;
     `;
 
     const FormErrorMessage = styled.p`
@@ -68,17 +71,19 @@ const Login: React.FC = ({}) => {
                 initialValues={initialValues}
                 onSubmit={handleSubmit}
             >
-                <StyledForm>
+                <Form>
                     {error && <FormErrorMessage>{error.message}.</FormErrorMessage>}
 
-                    <InputField label='Email' name='email' type='email' description='The email address you used to sign up.' />
-                    <InputField label='Password' name='password' type='password' description='Keep it secret!' />
+                    <InputContainer>
+                        <InputField label='Email' name='email' type='email' description='The email address you used to sign up.' />
+                        <InputField label='Password' name='password' type='password' description='Keep it secret!' />
+                    </InputContainer>
 
                     <ButtonContainer>
                         <Button label='Go to register' onClick={handleGoToRegister} />
                         <Button label='Login' style='submit' />
                     </ButtonContainer>
-                </StyledForm>
+                </Form>
             </Formik>
         </Modal>
     );

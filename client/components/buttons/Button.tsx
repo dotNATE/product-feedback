@@ -1,48 +1,37 @@
 import React from 'react';
 import styled, { StyledComponent } from '@emotion/styled';
 
-type ButtonProps = {
+type Props = {
     label: string,
     style?: 'submit' | 'cancel' | 'warning' | undefined,
     type?: "button" | "submit" | "reset" | undefined,
     onClick?: (event: React.MouseEvent<HTMLButtonElement>) => void,
 };
 
-const BaseButton: React.FC<ButtonProps> = ({ label, style, type, onClick }) => {
+const BaseButton: React.FC<Props> = ({ label, style, type, onClick }) => {
     const BaseButton = styled.button`
         background-color: rgb(58, 67, 116);
         border-radius: 10px;
         border: none;
         padding: .75rem 2rem;
-        margin-left: 1rem;
         &:hover {
             background-color: rgb(101, 110, 163);
             cursor: pointer;
         }
     `;
 
-    const SubmitButton = styled.button`
+    const SubmitButton = styled(BaseButton)`
         background-color: rgb(173, 31, 234);
-        border-radius: 10px;
-        border: none;
-        padding: .75rem 2rem;
-        margin-left: 1rem;
         &:hover {
             background-color: rgb(199, 90, 246);
-            cursor: pointer;
         }
     `;
 
-    const WarningButton = styled.button`
-    background-color: rgb(215, 55, 55);
-    border-radius: 10px;
-    border: none;
-    padding: .75rem 2rem;
-    margin-left: 1rem;
-    &:hover {
-        background-color: rgb(233, 136, 136);
-        cursor: pointer;
-    }
+    const WarningButton = styled(BaseButton)`
+        background-color: rgb(215, 55, 55);
+        &:hover {
+            background-color: rgb(233, 136, 136);
+        }
     `;
 
     const Label = styled.h4`

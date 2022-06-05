@@ -14,7 +14,6 @@ const InputField: React.FC<Props> = ({ name, description, label, error, type }) 
     const Container = styled.div`
         display: flex;
         flex-direction: column;
-        margin-top: 1rem;
     `;
     
     const StyledField = styled(Field)`
