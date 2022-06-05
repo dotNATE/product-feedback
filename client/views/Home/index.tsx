@@ -6,7 +6,8 @@ import { selectFeedback, selectCreateFeedback } from '../../store/feedback';
 import Layout from './components/Layout';
 import UtilityBar from './components/UtilityBar';
 import NoFeedback from './components/NoFeedback';
-import CreateFeedbackForm from './components/CreateFeedbackForm';
+import CreateFeedbackForm from '../../components/form/createFeedback/CreateFeedbackForm';
+import Modal from '../../components/Modal';
 
 const Home: React.FC = ({}) => {
     const feedback = useAppSelector(selectFeedback);
@@ -23,10 +24,10 @@ const Home: React.FC = ({}) => {
 
     const SecondaryColumnContent: ReactNode = <div></div>;
 
-    const Modal: ReactNode = createFeedbackOpen ? <CreateFeedbackForm /> : null;
+    const Form: ReactNode = createFeedbackOpen ? <Modal><CreateFeedbackForm /></Modal> : null;
 
     return (
-        <Layout primaryColumnContent={PrimaryColumnContent} secondaryColumnContent={SecondaryColumnContent} modal={Modal} />
+        <Layout primaryColumnContent={PrimaryColumnContent} secondaryColumnContent={SecondaryColumnContent} modal={Form} />
     );
 };
 

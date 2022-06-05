@@ -1,9 +1,7 @@
-import React from 'react';
-
 import { useAppDispatch } from '../../../store/hooks';
 import { openCreateFeedback } from '../../../store/feedback';
 
-import BaseButton from '../../../components/buttons/Button';
+import Button from '../../../components/buttons/Button';
 import PlusIcon from './PlusIcon';
 
 const AddFeedbackButton: React.FC = ({}) => {
@@ -14,7 +12,7 @@ const AddFeedbackButton: React.FC = ({}) => {
     };
     
     return (
-        <BaseButton label='Add Feedback' style='submit' icon={<PlusIcon />} onClick={handleClick} />
+        <Button label='Add Feedback' style='submit' icon={<PlusIcon />} onClick={handleClick} />
     );
 };
 

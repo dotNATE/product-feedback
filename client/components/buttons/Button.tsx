@@ -9,7 +9,7 @@ type Props = {
     icon?: ReactNode,
 };
 
-const BaseButton: React.FC<Props> = ({ label, style, type, onClick, icon }) => {
+const Button: React.FC<Props> = ({ label, style, type, onClick, icon }) => {
     const BaseButton = styled.button`
         display: flex;
         background-color: rgb(58, 67, 116);
@@ -65,4 +65,4 @@ const BaseButton: React.FC<Props> = ({ label, style, type, onClick, icon }) => {
     );
 };
 
-export default BaseButton;
+export default Button;
