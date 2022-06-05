@@ -1,3 +1,3 @@
-import getAllFeedback from '../queries/feedback/getAllFeedback';
+import getAllSuggestions from './suggestions/getAllSuggestions';
 
-export { getAllFeedback as getAllFeedbackQuery };
+export { getAllSuggestions as getAllSuggestionsQuery };

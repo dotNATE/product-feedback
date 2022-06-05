@@ -1,38 +1,38 @@
 import React, { ReactNode, useState } from 'react';
 
 import { useAppSelector } from '../../store/hooks';
-import { selectCreateFeedback } from '../../store/feedback';
+import { selectCreateSuggestion } from '../../store/suggestion';
 import { useQuery } from '@apollo/client';
-import { getAllFeedbackQuery } from '../../graphql/queries';
+import { getAllSuggestionsQuery } from '../../graphql/queries';
 
 import Layout from './components/Layout';
 import UtilityBar from './components/UtilityBar';
-import NoFeedback from './components/NoFeedback';
-import FeedbackList from './components/FeedbackList';
-import CreateFeedbackForm from '../../components/form/createFeedback/CreateFeedbackForm';
+import NoSuggestions from './components/NoSuggestions';
+import SuggestionList from './components/SuggestionList';
+import CreateSuggestionForm from '../../components/form/CreateSuggestionForm';
 import Modal from '../../components/Modal';
 
 const Home: React.FC = ({}) => {
-    const [feedback, setFeedback] = useState([]);
+    const [suggestions, setSuggestions] = useState([]);
 
-    const { loading } = useQuery(getAllFeedbackQuery, {
+    const { loading } = useQuery(getAllSuggestionsQuery, {
         onCompleted: (data) => {
-            setFeedback(data.getAllFeedback);
+            setSuggestions(data.getAllSuggestions);
         },
     });
 
-    const createFeedbackOpen = useAppSelector(selectCreateFeedback);
+    const createSuggestionOpen = useAppSelector(selectCreateSuggestion);
 
-    const Feedback: React.FC = () => {
-        return feedback && feedback.length > 0 ? <FeedbackList feedback={feedback} /> : <NoFeedback />;
+    const Suggestions: React.FC = () => {
+        return suggestions && suggestions.length > 0 ? <SuggestionList suggestion={suggestions} /> : <NoSuggestions />;
     };
 
     const PrimaryColumnContent: ReactNode = <>
-        <UtilityBar count={feedback.length} />
-        <Feedback />
+        <UtilityBar count={suggestions.length} />
+        <Suggestions />
     </>;
     const SecondaryColumnContent: ReactNode = <div></div>;
-    const Form: ReactNode = createFeedbackOpen ? <Modal><CreateFeedbackForm /></Modal> : null;
+    const Form: ReactNode = createSuggestionOpen ? <Modal><CreateSuggestionForm /></Modal> : null;
 
     return (
         <Layout primaryColumnContent={PrimaryColumnContent} secondaryColumnContent={SecondaryColumnContent} modal={Form} />

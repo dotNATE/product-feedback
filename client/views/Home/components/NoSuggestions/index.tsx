@@ -1,9 +1,9 @@
 import styled from '@emotion/styled';
 
-import NoFeedbackIcon from './NoFeedbackIcon';
-import AddFeedbackButton from '../UtilityBar/components/AddFeedbackButton';
+import NoSuggestionsIcon from './NoSuggestionsIcon';
+import AddSuggestionButton from '../UtilityBar/components/AddSuggestionButton';
 
-const NoFeedback: React.FC = () => {
+const NoSuggestion: React.FC = () => {
     const Container = styled.div`
         display: flex;
         flex-direction: column;
@@ -26,14 +26,14 @@ const NoFeedback: React.FC = () => {
 
     return (
         <Container>
-            <NoFeedbackIcon />
+            <NoSuggestionsIcon />
             <Typography>
-                <h1>There is no feedback yet.</h1>
+                <h1>There is no suggestion yet.</h1>
                 <p>Got a suggestion? Found a bug that needs to be squashed? We love hearing about new ideas to improve our app.</p>
             </Typography>
-            <AddFeedbackButton />
+            <AddSuggestionButton />
         </Container>
     );
 };
 
-export default NoFeedback;
+export default NoSuggestion;

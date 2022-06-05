@@ -1,7 +1,7 @@
 import { GraphQLObjectType, GraphQLID, GraphQLString } from 'graphql';
 
-const FeedbackType = new GraphQLObjectType({
-    name: "Feedback",
+const SuggestionType = new GraphQLObjectType({
+    name: "Suggestion",
     fields: () => ({
         id: { type: GraphQLID },
         title: { type: GraphQLString },
@@ -10,4 +10,4 @@ const FeedbackType = new GraphQLObjectType({
     }),
 });
 
-export default FeedbackType;
+export default SuggestionType;

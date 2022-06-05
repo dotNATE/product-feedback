@@ -1,22 +1,22 @@
 import { useAppDispatch } from '../../../store/hooks';
-import { closeCreateFeedback } from '../../../store/feedback';
+import { closeCreateSuggestion } from '../../../store/suggestion';
 
 import ButtonContainer from "../../buttons/ButtonContainer";
 import Button from "../../buttons/Button";
 
-const CreateFeedbackButtons: React.FC = ({}) => {
+const CreateSuggestionButtons: React.FC = ({}) => {
     const dispatch = useAppDispatch();
 
     const handleCloseModal = () => {
-        dispatch(closeCreateFeedback());
+        dispatch(closeCreateSuggestion());
     };
 
     return (
         <ButtonContainer>
             <Button label='Cancel' onClick={handleCloseModal} />
-            <Button label='Add Feedback' style='submit' type='submit' />
+            <Button label='Add Suggestion' style='submit' type='submit' />
         </ButtonContainer>
     );
 };
 
-export default CreateFeedbackButtons;
+export default CreateSuggestionButtons;

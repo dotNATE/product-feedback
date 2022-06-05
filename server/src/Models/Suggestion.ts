@@ -1,25 +1,25 @@
 import { DataTypes, Model, Optional } from "sequelize";
 import { sequelize } from './sequelize'
 
-interface FeedbackAttributes {
+interface SuggestionAttributes {
     id: string,
     title: string,
     category: string,
     detail: string,
 }
 
-interface FeedbackCreationAttributes
-    extends Optional<FeedbackAttributes, 'id'>{}
+interface SuggestionCreationAttributes
+    extends Optional<SuggestionAttributes, 'id'>{}
 
-interface FeedbackInstance
-    extends Model<FeedbackAttributes, FeedbackCreationAttributes>, FeedbackAttributes{
+interface SuggestionInstance
+    extends Model<SuggestionAttributes, SuggestionCreationAttributes>, SuggestionAttributes{
         createdAt?: Date;
         updatedAt?: Date;
         deletedAt?: Date;
     }
 
-const Feedback = sequelize.define<FeedbackInstance>(
-    'Feedback',
+const Suggestion = sequelize.define<SuggestionInstance>(
+    'Suggestion',
     {
         id: {
             allowNull: false,
@@ -47,4 +47,4 @@ const Feedback = sequelize.define<FeedbackInstance>(
     },
 );
 
-export default Feedback;
+export default Suggestion;

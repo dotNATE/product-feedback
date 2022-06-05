@@ -1,6 +1,6 @@
 import styled from '@emotion/styled';
 
-export type FeedbackType = {
+export type SuggestionType = {
     id: string;
     title: string;
     category: string;
@@ -8,7 +8,7 @@ export type FeedbackType = {
 };
 
 type Props = {
-    feedback: FeedbackType;
+    suggestion: SuggestionType;
 };
 
 const Container = styled.div`
@@ -42,14 +42,14 @@ const toSentenceCase = (string: string): string => {
     return result;
 };
 
-const Feedback: React.FC<Props> = ({ feedback }) => {
+const Suggestion: React.FC<Props> = ({ suggestion }) => {
     return (
         <Container>
-            <h3>{ feedback.title }</h3>
-            <Detail>{ feedback.detail }</Detail>
-            <CategoryPill className='two'>{ toSentenceCase(feedback.category) }</CategoryPill>
+            <h3>{ suggestion.title }</h3>
+            <Detail>{ suggestion.detail }</Detail>
+            <CategoryPill className='two'>{ toSentenceCase(suggestion.category) }</CategoryPill>
         </Container>
     );
 };
 
-export default Feedback;
+export default Suggestion;

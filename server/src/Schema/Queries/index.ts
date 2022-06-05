@@ -1,6 +1,6 @@
 import getAllUsers from "./User/getAllUsers";
-import getAllFeedback from "./Feedback/getAllFeedback";
+import getAllSuggestions from "./Suggestion/getAllSuggestions";
 
-const queries = { getAllUsers, getAllFeedback };
+const queries = { getAllUsers, getAllSuggestions };
 
 export default queries;

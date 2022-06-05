@@ -1,12 +1,12 @@
 import { gql } from "@apollo/client";
 
-const createFeedback = gql`
-    mutation createFeedback(
+const createSuggestion = gql`
+    mutation createSuggestion(
         $category: String
         $title: String
         $detail: String
     ) {
-        createFeedback(
+        createSuggestion(
             category: $category
             title: $title
             detail: $detail
@@ -19,4 +19,4 @@ const createFeedback = gql`
         }
 `;
 
-export default createFeedback;
+export default createSuggestion;

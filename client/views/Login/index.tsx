@@ -6,7 +6,7 @@ import { selectAuthenticated } from '../../store/auth';
 
 import Modal from '../../components/Modal';
 
-import LoginForm from '../../components/form/login/LoginForm';
+import LoginForm from '../../components/form/LoginForm';
 
 const Login: React.FC = ({}) => {
     const router = useRouter();

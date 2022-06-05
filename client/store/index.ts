@@ -1,11 +1,11 @@
 import { Action, configureStore, ThunkAction } from '@reduxjs/toolkit';
 import authReducer from './auth';
-import feedbackReducer from './feedback';
+import suggestionReducer from './suggestion';
   
 export const store = configureStore({
     reducer: {
         auth: authReducer,
-        feedback: feedbackReducer,
+        suggestion: suggestionReducer,
     },
 });
 

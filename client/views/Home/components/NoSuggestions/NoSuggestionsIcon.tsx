@@ -1,6 +1,6 @@
 import styled from '@emotion/styled';
 
-const NoFeedbackIcon: React.FC = () => {
+const NoSuggestionsIcon: React.FC = () => {
     const Container = styled.div`
         display: flex;
         align-items: center;
@@ -13,4 +13,4 @@ const NoFeedbackIcon: React.FC = () => {
     );
 };
 
-export default NoFeedbackIcon;
+export default NoSuggestionsIcon;

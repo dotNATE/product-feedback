@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from '@emotion/styled';
-import AddFeedbackButton from './components/AddFeedbackButton';
+import AddSuggestionButton from './components/AddSuggestionButton';
 import LightBulbIcon from './components/LightBulbIcon';
 
 type Props = {
@@ -34,7 +34,7 @@ const UtilityBar: React.FC<Props> = ({ count }) => {
                 <LightBulbIcon />
                 <StyledH3>{ count } Suggestions</StyledH3>
             </FlexRow>
-            <AddFeedbackButton />
+            <AddSuggestionButton />
         </Container>
     );
 };

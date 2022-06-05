@@ -3,8 +3,8 @@ import deleteUser from "./User/deleteUser";
 import updatePassword from "./User/updatePassword";
 import loginWithEmail from "./User/loginWithEmail";
 
-import createFeedback from "./Feedback/createFeedback";
+import createSuggestion from "./Suggestion/createSuggestion";
 
-const mutations = { createUser, deleteUser, updatePassword, loginWithEmail, createFeedback };
+const mutations = { createUser, deleteUser, updatePassword, loginWithEmail, createSuggestion };
 
 export default mutations;
