@@ -1,7 +1,7 @@
 import styled from '@emotion/styled';
 
 import NoFeedbackIcon from './NoFeedbackIcon';
-import AddFeedbackButton from './AddFeedbackButton';
+import AddFeedbackButton from '../UtilityBar/components/AddFeedbackButton';
 
 const NoFeedback: React.FC = () => {
     const Container = styled.div`
