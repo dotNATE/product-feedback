@@ -2,11 +2,12 @@ import React, { ReactNode } from 'react';
 import styled from '@emotion/styled';
 
 type Props = {
-    primaryColumnContent: ReactNode | ReactNode[],
-    secondaryColumnContent: ReactNode | ReactNode[],
+    primaryColumnContent: ReactNode,
+    secondaryColumnContent: ReactNode,
+    modal?: ReactNode,
 }
 
-const Layout: React.FC<Props> = ({ primaryColumnContent , secondaryColumnContent }) => {
+const Layout: React.FC<Props> = ({ primaryColumnContent , secondaryColumnContent, modal }) => {
     const SecondaryColumn = styled.div`
         display: flex;
         flex-direction: column;
@@ -38,6 +39,7 @@ const Layout: React.FC<Props> = ({ primaryColumnContent , secondaryColumnContent
             <PrimaryColumn>
                 { primaryColumnContent }
             </PrimaryColumn>
+            { modal }
         </Grid>
     );
 };
