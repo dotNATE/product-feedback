@@ -1,4 +1,3 @@
-import React from "react";
 import { useMutation } from '@apollo/client';
 import { useAppDispatch } from '../../../store/hooks';
 import { login as reduxLogin } from '../../../store/auth';
