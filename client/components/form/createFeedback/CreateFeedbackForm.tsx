@@ -1,11 +1,15 @@
 import React from 'react';
 import { useMutation } from '@apollo/client';
+import { useAppDispatch } from '../../../store/hooks';
+import { closeCreateFeedback } from '../../../store/feedback';
+import { client } from '../../../pages/_app';
 
 import { createFeedbackMutation } from '../../../graphql/mutations';
 
 import ModalForm from '../FormWrapper';
 import CreateFeedbackButtons from './CreateFeedbackButtons';
 import CreateFeedbackInputs from './CreateFeedbackInputs';
+import getAllFeedback from '../../../graphql/queries/feedback/getAllFeedback';
 
 interface Values {
     title: string;
@@ -19,9 +23,13 @@ const initialValues: Values = {
     detail: '',
 };
 
-const Login: React.FC = ({}) => {
+const CreateFeedbackForm: React.FC = ({}) => {
+    const dispatch = useAppDispatch();
+
     const [createFeedback, { error }] = useMutation(createFeedbackMutation, {
         onCompleted: (data): void => {
+            client.refetchQueries({include: [getAllFeedback]});
+            dispatch(closeCreateFeedback());
         },
         onError: (err) => {
             console.error(err);
@@ -39,4 +47,4 @@ const Login: React.FC = ({}) => {
     );
 };
 
-export default Login;
+export default CreateFeedbackForm;
