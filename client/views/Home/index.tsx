@@ -12,6 +12,7 @@ import SuggestionList from './components/SuggestionList';
 import CreateSuggestionForm from '../../components/forms/CreateSuggestionForm';
 import Modal from '../../components/Modal';
 import TitleCard from './components/TitleCard';
+import FilterCard from './components/FilterCard';
 
 const Home: React.FC = ({}) => {
     const [suggestions, setSuggestions] = useState([]);
@@ -33,9 +34,10 @@ const Home: React.FC = ({}) => {
         <Suggestions />
     </>;
 
-    const SecondaryColumnContent: ReactNode = <div>
+    const SecondaryColumnContent: ReactNode = <>
         <TitleCard title='Product Feedback' subtitle='Feedback Board' />
-    </div>;
+        <FilterCard />
+    </>;
 
     const Form: ReactNode = createSuggestionOpen ? <Modal><CreateSuggestionForm /></Modal> : null;
 
