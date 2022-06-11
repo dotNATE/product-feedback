@@ -5,6 +5,15 @@ import loginWithEmail from "./User/loginWithEmail";
 
 import createSuggestion from "./Suggestion/createSuggestion";
 
-const mutations = { createUser, deleteUser, updatePassword, loginWithEmail, createSuggestion };
+import addUpvote from "./Upvotes/addUpvote";
+
+const mutations = { 
+    createUser,
+    deleteUser,
+    updatePassword,
+    loginWithEmail,
+    createSuggestion,
+    addUpvote,
+};
 
 export default mutations;

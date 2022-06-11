@@ -6,7 +6,6 @@ import jwt from 'jsonwebtoken';
 const createSuggestion = {
     type: SuggestionType,
     args: {
-        id: { type: GraphQLID },
         title: { type: GraphQLString },
         category: { type: GraphQLString },
         detail: { type: GraphQLString },
