@@ -59,14 +59,13 @@ const User = sequelize.define<UserInstance>(
 );
 
 User.hasMany(Suggestion, {
-    sourceKey: 'id',
     foreignKey: 'createdBy',
     as: 'suggestions',
 });
 
 Suggestion.belongsTo(User, {
-    foreignKey: 'createdBy',
-    as: 'suggestions',
+    foreignKey: 'id',
+    as: 'user',
 });
 
 export default User;
