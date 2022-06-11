@@ -11,6 +11,7 @@ import NoSuggestions from './components/NoSuggestions';
 import SuggestionList from './components/SuggestionList';
 import CreateSuggestionForm from '../../components/forms/CreateSuggestionForm';
 import Modal from '../../components/Modal';
+import TitleCard from './components/TitleCard';
 
 const Home: React.FC = ({}) => {
     const [suggestions, setSuggestions] = useState([]);
@@ -31,7 +32,11 @@ const Home: React.FC = ({}) => {
         <UtilityBar count={suggestions.length} />
         <Suggestions />
     </>;
-    const SecondaryColumnContent: ReactNode = <div></div>;
+
+    const SecondaryColumnContent: ReactNode = <div>
+        <TitleCard title='Product Feedback' subtitle='Feedback Board' />
+    </div>;
+
     const Form: ReactNode = createSuggestionOpen ? <Modal><CreateSuggestionForm /></Modal> : null;
 
     return (
