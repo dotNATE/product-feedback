@@ -12,7 +12,6 @@ const Layout: React.FC<Props> = ({ primaryColumnContent , secondaryColumnContent
         display: flex;
         flex-direction: column;
         gap: 2rem;
-        background-color: red;
         width: 100%;
     `;
 
