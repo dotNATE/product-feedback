@@ -4,9 +4,9 @@ import { SuggestionType } from "../../TypeDefs"
 
 const getAllSuggestions = {
     type: new GraphQLList(SuggestionType),
-    resolve() {
+    resolve: async () => {
         console.log('getAllSuggestions invoked');
-        const suggestions = Suggestion.findAll({
+        const suggestions = await Suggestion.findAll({
             order: [['createdAt', 'DESC']]
         });
 
