@@ -1,6 +1,5 @@
 import { DataTypes, Model, Optional } from "sequelize";
 import { sequelize } from './sequelize'
-import Suggestion from "./Suggestion";
 
 interface UserAttributes {
     id: string,
@@ -57,15 +56,5 @@ const User = sequelize.define<UserInstance>(
         paranoid: true,
     },
 );
-
-User.hasMany(Suggestion, {
-    foreignKey: 'createdBy',
-    as: 'suggestions',
-});
-
-Suggestion.belongsTo(User, {
-    foreignKey: 'id',
-    as: 'user',
-});
 
 export default User;
