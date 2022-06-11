@@ -1,7 +1,7 @@
-import React, { ReactNode, useState } from 'react';
+import React, { ReactNode } from 'react';
 
-import { useAppSelector } from '../../store/hooks';
-import { selectCreateSuggestion } from '../../store/suggestion';
+import { useAppSelector, useAppDispatch } from '../../store/hooks';
+import { selectCreateSuggestion, addSuggestionsToState, selectSuggestions, selectSuggestionFilter } from '../../store/suggestion';
 import { useQuery } from '@apollo/client';
 import { getAllSuggestionsQuery } from '../../graphql/queries';
 
@@ -14,23 +14,30 @@ import Modal from '../../components/Modal';
 import TitleCard from './components/TitleCard';
 import FilterCard from './components/FilterCard';
 
+import type { SuggestionType } from './components/SuggestionList/Suggestion';
+
 const Home: React.FC = ({}) => {
-    const [suggestions, setSuggestions] = useState([]);
+    const dispatch = useAppDispatch();
+    const suggestions = useAppSelector(selectSuggestions);
+    let filteredSuggestions: SuggestionType[];
+    const suggestionFilter = useAppSelector(selectSuggestionFilter);
 
     const { loading } = useQuery(getAllSuggestionsQuery, {
         onCompleted: (data) => {
-            setSuggestions(data.getAllSuggestions);
+            dispatch(addSuggestionsToState({ suggestions: data.getAllSuggestions }));
         },
     });
+
+    filteredSuggestions = suggestionFilter !== 'all' ? suggestions.filter((el) => el.category === suggestionFilter) : suggestions;
 
     const createSuggestionOpen = useAppSelector(selectCreateSuggestion);
 
     const Suggestions: React.FC = () => {
-        return suggestions && suggestions.length > 0 ? <SuggestionList suggestion={suggestions} /> : <NoSuggestions />;
+        return filteredSuggestions && filteredSuggestions.length > 0 ? <SuggestionList suggestion={filteredSuggestions} /> : <NoSuggestions />;
     };
 
     const PrimaryColumnContent: ReactNode = <>
-        <UtilityBar count={suggestions.length} />
+        <UtilityBar count={filteredSuggestions.length} />
         <Suggestions />
     </>;
 
