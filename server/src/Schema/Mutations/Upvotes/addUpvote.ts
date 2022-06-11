@@ -24,7 +24,7 @@ const addUpvote = {
             suggestionId
         });
 
-        return { success: true, message: 'sdf' };
+        return { success: true, message: 'Upvote successful' };
     },
 };
 
