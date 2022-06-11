@@ -27,10 +27,10 @@ const FilterCard: React.FC<Props> = ({  }) => {
     return (
         <WhiteCard>
             <Container>
-                <FilterPill label='All' selected={true} />
-                <FilterPill label='Enhancement' selected={false} />
-                <FilterPill label='Bug' selected={false} />
-                <FilterPill label='Feature' selected={false} />
+                <FilterPill label='All' />
+                <FilterPill label='Enhancement' />
+                <FilterPill label='Bug' />
+                <FilterPill label='Feature' />
             </Container>
         </WhiteCard>
     );
