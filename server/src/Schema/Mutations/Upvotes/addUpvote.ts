@@ -1,6 +1,7 @@
 import { GraphQLID, GraphQLString } from "graphql";
 import { Upvote } from "../../../Models";
 import { MessageType } from "../../TypeDefs";
+import { Op } from 'sequelize';
 import jwt from 'jsonwebtoken';
 
 const addUpvote = {
@@ -18,6 +19,19 @@ const addUpvote = {
         jwt.verify(authToken, String(ACCESS_TOKEN_SECRET), (error: any) => {
             if (error) throw new Error("Unauthorised");
         });
+
+        const upvote = await Upvote.findOne({
+            where: {
+                [Op.and]: [
+                    { userId },
+                    { suggestionId }
+                ],
+            },
+        });
+
+        if (upvote) {
+            throw new Error("Upvote already exists")
+        }
 
         await Upvote.create({
             userId,
