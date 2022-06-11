@@ -23,14 +23,14 @@ const Container = styled.div`
 
 const Detail = styled.p`
     color: rgb(100, 113, 150);
-`
+`;
 
 const CategoryPill = styled.p`
     background-color: rgb(242, 244, 255);
     color: rgb(70, 97, 230);
     padding: 0.6875rem 1.25rem;
     border-radius: 10px;
-`
+`;
 
 const toSentenceCase = (string: string): string => {
     let result: string = '';
