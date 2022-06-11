@@ -37,7 +37,7 @@ const Home: React.FC = ({}) => {
     };
 
     const PrimaryColumnContent: ReactNode = <>
-        <UtilityBar count={filteredSuggestions.length} />
+        <UtilityBar count={suggestions.length} />
         <Suggestions />
     </>;
 
