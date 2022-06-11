@@ -1,12 +1,17 @@
 import React from 'react';
 import styled from '@emotion/styled';
+import { useAppSelector, useAppDispatch } from '../../../../store/hooks';
+import { selectSuggestionFilter, setSuggestionFilter } from '../../../../store/suggestion';
 
 type Props = {
     label: string,
-    selected: boolean,
 };
 
-const FilterPill: React.FC<Props> = ({ label, selected }) => {
+const FilterPill: React.FC<Props> = ({ label }) => {
+    const dispatch = useAppDispatch();
+    const suggestionFilter = useAppSelector(selectSuggestionFilter);
+    const selected = label.toLowerCase() === suggestionFilter;
+
     const StyledP = styled.p`
         background-color: ${ selected ? 'rgb(70, 97, 230)' : 'rgb(242, 244, 255)' };
         color: ${ selected ? 'white' : 'rgb(70, 97, 230)'};
@@ -21,8 +26,14 @@ const FilterPill: React.FC<Props> = ({ label, selected }) => {
         }
     `;
 
+    const handleClick = (): void => {
+        dispatch(setSuggestionFilter({
+            suggestionFilter: label.toLowerCase()
+        }));
+    };
+
     return (
-        <StyledP className='two'>{ label }</StyledP>
+        <StyledP className='two' onClick={handleClick}>{ label }</StyledP>
     );
 };
 
