@@ -9,7 +9,7 @@ import { client } from '../../../pages/_app';
 import ModalForm from '../FormWrapper';
 import CreateSuggestionButtons from './CreateSuggestionButtons';
 import CreateSuggestionInputs from './CreateSuggestionInputs';
-import getAllSuggestions from '../../../graphql/queries/suggestions/getAllSuggestions';
+import getAllSuggestionsWithUpvotes from '../../../graphql/queries/suggestions/getAllSuggestionsWithUpvotes';
 import { selectId } from '../../../store/auth';
 
 interface Values {
@@ -25,7 +25,7 @@ const CreateSuggestionForm: React.FC = ({}) => {
 
     const [createSuggestion, { error }] = useMutation(createSuggestionsMutation, {
         onCompleted: (data): void => {
-            client.refetchQueries({ include: [getAllSuggestions] });
+            client.refetchQueries({ include: [getAllSuggestionsWithUpvotes] });
             dispatch(closeCreateSuggestion());
         },
         onError: (err) => {
