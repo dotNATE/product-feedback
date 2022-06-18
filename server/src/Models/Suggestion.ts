@@ -7,6 +7,7 @@ interface SuggestionAttributes {
     category: string,
     detail: string,
     createdBy: string,
+    upvotes: number,
 }
 
 interface SuggestionCreationAttributes
@@ -46,6 +47,10 @@ const Suggestion = sequelize.define<SuggestionInstance>(
             allowNull: false,
             type: DataTypes.UUID,
         },
+        upvotes: {
+            allowNull: false,
+            type: DataTypes.INTEGER,
+        }
     },
     {
         paranoid: true,
