@@ -4,14 +4,14 @@ import { MessageType } from "../../TypeDefs";
 import { Op } from 'sequelize';
 import jwt from 'jsonwebtoken';
 
-const addUpvote = {
+const removeUpvote = {
     type: MessageType,
     args: {
         userId: { type: GraphQLID},
         suggestionId: { type: GraphQLID},
     },
     async resolve(_: any, args: any, context: any) {
-        console.log('addUpvote invoked with: ', args);
+        console.log('removeUpvote invoked with: ', args);
         const { userId, suggestionId } = args;
         const { authToken } = context;
         const { ACCESS_TOKEN_SECRET } = process.env;
@@ -29,14 +29,11 @@ const addUpvote = {
             },
         });
 
-        if (upvote) {
-            throw new Error("Upvote already exists")
+        if (!upvote) {
+            throw new Error("Upvote does not exist!")
         }
 
-        await Upvote.create({
-            userId,
-            suggestionId
-        });
+        await upvote.destroy();
 
         const upvoteCount = await Upvote.count({
             where: {
@@ -44,16 +41,14 @@ const addUpvote = {
             },
         });
 
-        console.log("upvoteCount: ", upvoteCount);
-
         await Suggestion.update({ upvotes: upvoteCount }, {
             where: {
                 id: suggestionId,
             },
         });
 
-        return { success: true, message: 'Upvote successful' };
+        return { success: true, message: 'Upvote removed successfully' };
     },
 };
 
-export default addUpvote;
+export default removeUpvote;

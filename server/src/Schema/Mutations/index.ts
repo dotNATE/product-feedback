@@ -6,6 +6,7 @@ import loginWithEmail from "./User/loginWithEmail";
 import createSuggestion from "./Suggestion/createSuggestion";
 
 import addUpvote from "./Upvotes/addUpvote";
+import removeUpvote from "./Upvotes/removeUpvote";
 
 const mutations = { 
     createUser,
@@ -14,6 +15,7 @@ const mutations = {
     loginWithEmail,
     createSuggestion,
     addUpvote,
+    removeUpvote,
 };
 
 export default mutations;
