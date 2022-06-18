@@ -34,6 +34,7 @@ const UtilityBar: React.FC<Props> = ({ count }) => {
         flex-direction: flex-row;
         gap: 0.375rem;
         padding-left: 1.5rem;
+        cursor: pointer;
     `;
 
     const LightH4 = styled.h4`
