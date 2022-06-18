@@ -1,6 +1,15 @@
 import styled from '@emotion/styled';
 import Upvote from "./components/Upvote";
 
+import { client } from '../../../../../pages/_app';
+import { useMutation } from '@apollo/client';
+import addUpvote from '../../../../../graphql/mutations/upvotes/addUpvote';
+import removeUpvote from '../../../../../graphql/mutations/upvotes/removeUpvote';
+
+import { useAppSelector } from '../../../../../store/hooks';
+import { selectId } from '../../../../../store/auth';
+import { getAllSuggestionsWithUpvotesQuery } from '../../../../../graphql/queries';
+
 export type SuggestionType = {
     id: string;
     title: string;
@@ -54,9 +63,33 @@ const toSentenceCase = (string: string): string => {
 };
 
 const Suggestion: React.FC<Props> = ({ suggestion }) => {
+    const userId = useAppSelector(selectId);
+
+    const [addUpvoteClickHandler, { loading: loadingAdd }] = useMutation(addUpvote, {
+        variables: {
+            userId,
+            suggestionId: suggestion.id,
+        },
+        onCompleted: () => {
+            client.refetchQueries({ include: [getAllSuggestionsWithUpvotesQuery] });
+        }
+    });
+
+    const [removeUpvoteClickHandler, { loading: loadingRemove }] = useMutation(removeUpvote, {
+        variables: {
+            userId,
+            suggestionId: suggestion.id,
+        },
+        onCompleted: () => {
+            client.refetchQueries({ include: [getAllSuggestionsWithUpvotesQuery] });
+        }
+    });
+
     return (
         <Container>
-            <Upvote count={ suggestion.upvotes } selected={ suggestion.upvotedByUser } />
+            <div onClick={ suggestion.upvotedByUser ? () => removeUpvoteClickHandler() : () => addUpvoteClickHandler()}>
+                <Upvote count={ suggestion.upvotes } selected={ suggestion.upvotedByUser } />
+            </div>
             <Content>
                 <h3>{ suggestion.title }</h3>
                 <Detail>{ suggestion.detail }</Detail>
