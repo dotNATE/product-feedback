@@ -1,5 +1,5 @@
 import { GraphQLID, GraphQLString } from "graphql";
-import { Upvote } from "../../../Models";
+import { Upvote, Suggestion } from "../../../Models";
 import { MessageType } from "../../TypeDefs";
 import { Op } from 'sequelize';
 import jwt from 'jsonwebtoken';
@@ -36,6 +36,20 @@ const addUpvote = {
         await Upvote.create({
             userId,
             suggestionId
+        });
+
+        const upvoteCount = await Upvote.count({
+            where: {
+                suggestionId,
+            },
+        });
+
+        console.log("upvoteCount: ", upvoteCount);
+
+        await Suggestion.update({ upvotes: upvoteCount }, {
+            where: {
+                id: suggestionId,
+            },
         });
 
         return { success: true, message: 'Upvote successful' };

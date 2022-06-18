@@ -7,7 +7,7 @@ const getAllSuggestions = {
     resolve: async () => {
         console.log('getAllSuggestions invoked');
         const suggestions = await Suggestion.findAll({
-            order: [['createdAt', 'DESC']]
+            order: [['createdAt', 'DESC']],
         });
 
         return suggestions;
