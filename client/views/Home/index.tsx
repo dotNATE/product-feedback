@@ -2,8 +2,9 @@ import React, { ReactNode } from 'react';
 
 import { useAppSelector, useAppDispatch } from '../../store/hooks';
 import { selectCreateSuggestion, addSuggestionsToState, selectSuggestions, selectSuggestionFilter } from '../../store/suggestion';
+import { selectId } from '../../store/auth';
 import { useQuery } from '@apollo/client';
-import { getAllSuggestionsQuery } from '../../graphql/queries';
+import { getAllSuggestionsWithUpvotesQuery } from '../../graphql/queries';
 
 import Layout from './components/Layout';
 import UtilityBar from './components/UtilityBar';
@@ -19,12 +20,16 @@ import type { SuggestionType } from './components/SuggestionList/Suggestion';
 const Home: React.FC = ({}) => {
     const dispatch = useAppDispatch();
     const suggestions = useAppSelector(selectSuggestions);
+    const userId = useAppSelector(selectId);
     let filteredSuggestions: SuggestionType[];
     const suggestionFilter = useAppSelector(selectSuggestionFilter);
 
-    const { loading } = useQuery(getAllSuggestionsQuery, {
+    const { loading } = useQuery(getAllSuggestionsWithUpvotesQuery, {
+        variables: {
+            userId,
+        },
         onCompleted: (data) => {
-            dispatch(addSuggestionsToState({ suggestions: data.getAllSuggestions }));
+            dispatch(addSuggestionsToState({ suggestions: data.getAllSuggestionsWithUpvotes }));
         },
     });
 
