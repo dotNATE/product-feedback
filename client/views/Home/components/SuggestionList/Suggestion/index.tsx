@@ -1,10 +1,13 @@
 import styled from '@emotion/styled';
+import Upvote from "./components/Upvote";
 
 export type SuggestionType = {
     id: string;
     title: string;
     category: string;
     detail: string;
+    upvotes: number;
+    upvotedByUser: boolean;
 };
 
 type Props = {
@@ -13,10 +16,18 @@ type Props = {
 
 const Container = styled.div`
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     background-color: white;
     border-radius: 10px;
     padding: 1.75rem;
+    align-items: flex-start;
+    gap: .275rem;
+`;
+
+const Content = styled.div`
+    display: flex;
+    flex-direction: column;
+    padding: 0 1.75rem;
     align-items: flex-start;
     gap: .275rem;
 `;
@@ -45,9 +56,12 @@ const toSentenceCase = (string: string): string => {
 const Suggestion: React.FC<Props> = ({ suggestion }) => {
     return (
         <Container>
-            <h3>{ suggestion.title }</h3>
-            <Detail>{ suggestion.detail }</Detail>
-            <CategoryPill className='two'>{ toSentenceCase(suggestion.category) }</CategoryPill>
+            <Upvote count={ suggestion.upvotes } selected={ suggestion.upvotedByUser } />
+            <Content>
+                <h3>{ suggestion.title }</h3>
+                <Detail>{ suggestion.detail }</Detail>
+                <CategoryPill className='two'>{ toSentenceCase(suggestion.category) }</CategoryPill>
+            </Content>
         </Container>
     );
 };
