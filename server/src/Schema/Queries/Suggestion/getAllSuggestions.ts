@@ -1,16 +1,12 @@
 import { GraphQLList } from "graphql"
-import { Suggestion } from "../../../Models";
+
+import { getAllSuggestions as getAllSuggestionsHelper } from "../../../helpers/suggestions";
 import { SuggestionType } from "../../TypeDefs"
 
 const getAllSuggestions = {
     type: new GraphQLList(SuggestionType),
     resolve: async () => {
-        console.log('getAllSuggestions invoked');
-        const suggestions = await Suggestion.findAll({
-            order: [['createdAt', 'DESC']],
-        });
-
-        return suggestions;
+        return await getAllSuggestionsHelper();
     },
 };
 

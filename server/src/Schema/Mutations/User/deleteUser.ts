@@ -1,30 +1,19 @@
 import { GraphQLID } from "graphql";
-import { User } from "../../../Models";
 import { MessageType } from "../../TypeDefs";
 
-import jwt from 'jsonwebtoken';
+import { isAuthenticated } from "../../../helpers/auth";
+import { deleteUserById } from "../../../helpers/users";
 
 const deleteUser = {
     type: MessageType,
     args: {
         id: { type: GraphQLID },
     },
-    async resolve(_: any, args: any, context: any) {
-        console.log('deleteUser invoked with: ', args);
-        const { id } = args;
-        const { ACCESS_TOKEN_SECRET } = process.env;
-        const { authToken } = context;
+    async resolve(_: any, { id }: any, { authToken }: any) {
 
-        jwt.verify(authToken, String(ACCESS_TOKEN_SECRET), (error: any, data: any) => {
-            if (error) throw new Error(error);
-            if (id !== data.userId) throw new Error("You do not have permission to delete this user");
-        });
-        
-        await User.destroy({
-            where: {
-                id
-            },
-        });
+        isAuthenticated(authToken);
+
+        await deleteUserById(id);        
 
         return { success: true, message: "User deleted successfully" };
     },

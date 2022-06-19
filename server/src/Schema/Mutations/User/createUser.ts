@@ -1,8 +1,8 @@
 import { GraphQLString } from "graphql";
-import { User } from "../../../Models";
 import { UserType } from "../../TypeDefs";
 
-const bcrpyt = require('bcrypt');
+import { getUserByEmail, getUserByUsername } from "../../../helpers/users";
+import { createNewUser } from "../../../helpers/auth";
 
 const createUser = {
     type: UserType,
@@ -13,31 +13,15 @@ const createUser = {
         username: { type: GraphQLString },
         password: { type: GraphQLString },
     },
-    async resolve(_: any, args: any) {
-        console.log('createUser invoked with: ', args);
-        const { firstName, lastName, email, username, password } = args;
-        const { BCRYPT_ROUNDS } = process.env;
+    async resolve(_: any, { firstName, lastName, email, username, password }: any) {
 
-        const userByEmailCheck = await User.findOne({
-            where: {
-                email,
-            },
-        });
+        const userByEmail = await getUserByEmail(email);
+        if (userByEmail) throw new Error("This email address is already in use");
 
-        if (userByEmailCheck) throw new Error("This email address is already in use");
+        const userByUsername = await getUserByUsername(username);
+        if (userByUsername) throw new Error("This username is already in use");
 
-        const userByUsernameCheck = await User.findOne({
-            where: {
-                username,
-            },
-        });
-
-        if (userByUsernameCheck) throw new Error("This username is already in use");
-
-        const passwordHash: string = await bcrpyt.hash(password, Number(BCRYPT_ROUNDS));
-        const newUser = await User.create({ firstName, lastName, email, username, password: passwordHash });
-
-        return newUser;
+        return await createNewUser(firstName, lastName, email, username, password);
     },
 };
 
