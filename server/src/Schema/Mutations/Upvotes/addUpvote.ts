@@ -1,8 +1,9 @@
 import { GraphQLID } from "graphql";
-import { Upvote, Suggestion } from "../../../Models";
-import { MessageType } from "../../TypeDefs";
+import { Upvote } from "../../../Models";
 import { Op } from 'sequelize';
-import jwt from 'jsonwebtoken';
+
+import { isAuthenticated, refreshUpvoteCount } from '../../../helpers';
+import { MessageType } from "../../TypeDefs";
 
 const addUpvote = {
     type: MessageType,
@@ -10,50 +11,33 @@ const addUpvote = {
         userId: { type: GraphQLID},
         suggestionId: { type: GraphQLID},
     },
-    async resolve(_: any, args: any, context: any) {
-        console.log('addUpvote invoked with: ', args);
-        const { userId, suggestionId } = args;
-        const { authToken } = context;
-        const { ACCESS_TOKEN_SECRET } = process.env;
+    async resolve(_: any, { userId, suggestionId }: any, { authToken }: any) {
+            console.log('addUpvote invoked with: ', { userId, suggestionId });
 
-        jwt.verify(authToken, String(ACCESS_TOKEN_SECRET), (error: any) => {
-            if (error) throw new Error("Unauthorised");
-        });
+            isAuthenticated(authToken);
+        
+            const upvote = await Upvote.findOne({
+                where: {
+                    [Op.and]: [
+                        { userId },
+                        { suggestionId }
+                    ],
+                },
+            });
+        
+            if (upvote) {
+                throw new Error("Upvote already exists")
+            }
+        
+            await Upvote.create({
+                userId,
+                suggestionId
+            });
 
-        const upvote = await Upvote.findOne({
-            where: {
-                [Op.and]: [
-                    { userId },
-                    { suggestionId }
-                ],
-            },
-        });
-
-        if (upvote) {
-            throw new Error("Upvote already exists")
-        }
-
-        await Upvote.create({
-            userId,
-            suggestionId
-        });
-
-        const upvoteCount = await Upvote.count({
-            where: {
-                suggestionId,
-            },
-        });
-
-        console.log("upvoteCount: ", upvoteCount);
-
-        await Suggestion.update({ upvotes: upvoteCount }, {
-            where: {
-                id: suggestionId,
-            },
-        });
-
-        return { success: true, message: 'Upvote successful' };
-    },
+            refreshUpvoteCount(suggestionId);
+        
+            return { success: true, message: 'Upvote successful' };
+        },
 };
 
 export default addUpvote;
