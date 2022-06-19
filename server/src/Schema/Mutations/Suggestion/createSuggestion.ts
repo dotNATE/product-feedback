@@ -13,7 +13,6 @@ const createSuggestion = {
         createdBy: { type: GraphQLID },
     },
     async resolve(_: any, { title, category, detail, createdBy }: any, { authToken }: any) {
-
         isAuthenticated(authToken);
 
         if (title.length === 0 || category.length === 0 || detail.length === 0) {

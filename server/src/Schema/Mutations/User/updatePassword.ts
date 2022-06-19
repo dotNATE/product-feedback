@@ -5,7 +5,6 @@ import { checkPassword, isAuthenticated } from "../../../helpers/auth";
 import { getUserByUsername, updateUserPasswordByUsername } from "../../../helpers/users";
 
 export const resolve = async (_: any, { username, oldPassword, newPassword }: any, { authToken }: any) => {
-
     isAuthenticated(authToken);
 
     if (oldPassword === newPassword) throw new Error("Your new password must be different from your old password");

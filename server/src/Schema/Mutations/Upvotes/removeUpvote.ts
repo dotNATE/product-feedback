@@ -11,7 +11,6 @@ const removeUpvote = {
         suggestionId: { type: GraphQLID},
     },
     async resolve(_: any, { userId, suggestionId }: any, { authToken }: any) {
-
         isAuthenticated(authToken);
 
         const upvote = await getOneUpvote(userId, suggestionId);

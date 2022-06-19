@@ -14,7 +14,6 @@ const createUser = {
         password: { type: GraphQLString },
     },
     async resolve(_: any, { firstName, lastName, email, username, password }: any) {
-
         const userByEmail = await getUserByEmail(email);
         if (userByEmail) throw new Error("This email address is already in use");
 

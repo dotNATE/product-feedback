@@ -43,3 +43,9 @@ export const updateUserPasswordByUsername = async (username: string, newPassword
         },
     });
 };
+
+export const getAllUsers = async () => {
+    return await User.findAll({
+        order: [['createdAt', 'DESC']],
+    });
+};

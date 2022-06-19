@@ -1,14 +1,12 @@
 import { GraphQLList } from "graphql"
-import { User } from "../../../Models";
+
+import { getAllUsers as getAllUsersHelper } from '../../../helpers/users'
 import { UserType } from "../../TypeDefs"
 
 const getAllUsers = {
     type: new GraphQLList(UserType),
-    resolve() {
-        console.log('getAllUsers invoked');
-        const users = User.findAll();
-
-        return users;
+    async resolve() {
+        return await getAllUsersHelper();
     },
 };
 

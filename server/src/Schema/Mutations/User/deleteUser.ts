@@ -10,7 +10,6 @@ const deleteUser = {
         id: { type: GraphQLID },
     },
     async resolve(_: any, { id }: any, { authToken }: any) {
-
         isAuthenticated(authToken);
 
         await deleteUserById(id);        

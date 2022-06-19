@@ -12,25 +12,23 @@ const addUpvote = {
         suggestionId: { type: GraphQLID},
     },
     async resolve(_: any, { userId, suggestionId }: any, { authToken }: any) {
-            console.log('addUpvote invoked with: ', { userId, suggestionId });
+        isAuthenticated(authToken);
+    
+        const upvote = await getOneUpvote(userId, suggestionId);
+    
+        if (upvote) {
+            throw new Error("Upvote already exists")
+        }
+    
+        await Upvote.create({
+            userId,
+            suggestionId
+        });
 
-            isAuthenticated(authToken);
-        
-            const upvote = await getOneUpvote(userId, suggestionId);
-        
-            if (upvote) {
-                throw new Error("Upvote already exists")
-            }
-        
-            await Upvote.create({
-                userId,
-                suggestionId
-            });
-
-            refreshUpvoteCount(suggestionId);
-        
-            return { success: true, message: 'Upvote successful' };
-        },
+        refreshUpvoteCount(suggestionId);
+    
+        return { success: true, message: 'Upvote successful' };
+    },
 };
 
 export default addUpvote;

@@ -11,7 +11,6 @@ const loginWithEmail = {
         password: { type: GraphQLString },
     },
     async resolve (_: any, { email, password }: any) {
-
         const user = await getUserByEmail(email);
         if (!user) throw new Error("No account found for that email");
 
