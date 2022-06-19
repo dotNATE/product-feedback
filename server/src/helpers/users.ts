@@ -2,6 +2,25 @@ import { User } from '../Models';
 
 import { hashPassword } from './auth';
 
+export const createNewUser = async (firstName: string, lastName: string, email: string, username: string, password: string) => {
+    const passwordHash: string = await hashPassword(password);
+    return await User.create({ firstName, lastName, email, username, password: passwordHash });
+};
+
+export const deleteUserById = async (id: string) => {
+    await User.destroy({
+        where: {
+            id
+        },
+    });
+};
+
+export const getAllUsers = async () => {
+    return await User.findAll({
+        order: [['createdAt', 'DESC']],
+    });
+};
+
 export const getUserByEmail = async (email: string) => {
     return await User.findOne({
         where: {
@@ -26,14 +45,6 @@ export const getUserByUsername = async (username: string) => {
     });
 };
 
-export const deleteUserById = async (id: string) => {
-    await User.destroy({
-        where: {
-            id
-        },
-    });
-};
-
 export const updateUserPasswordByUsername = async (username: string, newPassword: string) => {
     const password: string = await hashPassword(newPassword);
 
@@ -41,11 +52,5 @@ export const updateUserPasswordByUsername = async (username: string, newPassword
         where: {
             username,
         },
-    });
-};
-
-export const getAllUsers = async () => {
-    return await User.findAll({
-        order: [['createdAt', 'DESC']],
     });
 };

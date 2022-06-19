@@ -1,6 +1,19 @@
 import { Suggestion, Upvote } from '../Models';
 import { Op } from 'sequelize';
 
+export const getOneUpvote = async (userId: string, suggestionId: string) => {
+    const upvote = await Upvote.findOne({
+        where: {
+            [Op.and]: [
+                { userId },
+                { suggestionId }
+            ],
+        },
+    });
+
+    return upvote;
+};
+
 export const refreshUpvoteCount = async (suggestionId: string) => {
     const upvoteCount = await Upvote.count({
         where: {
@@ -13,17 +26,4 @@ export const refreshUpvoteCount = async (suggestionId: string) => {
             id: suggestionId,
         },
     });
-};
-
-export const getOneUpvote = async (userId: string, suggestionId: string) => {
-    const upvote = await Upvote.findOne({
-        where: {
-            [Op.and]: [
-                { userId },
-                { suggestionId }
-            ],
-        },
-    });
-
-    return upvote;
 };
