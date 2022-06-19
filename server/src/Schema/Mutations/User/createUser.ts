@@ -2,7 +2,7 @@ import { GraphQLString } from "graphql";
 import { UserType } from "../../TypeDefs";
 
 import { getUserByEmail, getUserByUsername } from "../../../helpers/users";
-import { createNewUser } from "../../../helpers/auth";
+import { createNewUser } from "../../../helpers/users";
 
 const createUser = {
     type: UserType,

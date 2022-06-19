@@ -4,7 +4,13 @@ import { hashPassword } from './auth';
 
 export const createNewUser = async (firstName: string, lastName: string, email: string, username: string, password: string) => {
     const passwordHash: string = await hashPassword(password);
-    return await User.create({ firstName, lastName, email, username, password: passwordHash });
+    return await User.create({
+        firstName,
+        lastName,
+        email,
+        username,
+        password: passwordHash
+    });
 };
 
 export const deleteUserById = async (id: string) => {

@@ -1,6 +1,13 @@
 import { Suggestion, Upvote } from '../Models';
 import { Op } from 'sequelize';
 
+export const createNewUpvote = async (userId: string, suggestionId: string) => {
+    return await Upvote.create({
+        userId,
+        suggestionId
+    });
+};
+
 export const getOneUpvote = async (userId: string, suggestionId: string) => {
     const upvote = await Upvote.findOne({
         where: {

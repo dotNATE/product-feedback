@@ -1,8 +1,7 @@
 import { GraphQLID } from "graphql";
-import { Upvote } from "../../../Models";
 
 import { isAuthenticated } from '../../../helpers/auth';
-import { refreshUpvoteCount, getOneUpvote } from '../../../helpers/upvotes';
+import { refreshUpvoteCount, getOneUpvote, createNewUpvote } from '../../../helpers/upvotes';
 import { MessageType } from "../../TypeDefs";
 
 const addUpvote = {
@@ -15,15 +14,9 @@ const addUpvote = {
         isAuthenticated(authToken);
     
         const upvote = await getOneUpvote(userId, suggestionId);
+        if (upvote) throw new Error("Upvote already exists");
     
-        if (upvote) {
-            throw new Error("Upvote already exists")
-        }
-    
-        await Upvote.create({
-            userId,
-            suggestionId
-        });
+        await createNewUpvote(userId, suggestionId);
 
         refreshUpvoteCount(suggestionId);
     

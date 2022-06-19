@@ -17,9 +17,9 @@ const loginWithEmail = {
         const isPasswordValid: boolean = await checkPassword(password, user.password);
         if (!isPasswordValid) throw new Error("Incorrect password");
 
-        const accessToken: string = generateAccessToken(user.id);
+        const token: string = generateAccessToken(user.id);
 
-        return { token: accessToken, id: user.id };
+        return { token, id: user.id };
     },
 };
 

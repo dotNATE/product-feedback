@@ -1,8 +1,8 @@
 import { GraphQLID, GraphQLString } from "graphql";
-import { Suggestion } from "../../../Models";
 import { SuggestionType } from "../../TypeDefs";
 
 import { isAuthenticated } from "../../../helpers/auth";
+import { createNewSuggestion } from "../../../helpers/suggestions";
 
 const createSuggestion = {
     type: SuggestionType,
@@ -19,9 +19,7 @@ const createSuggestion = {
             throw new Error("You must fill in all fields");
         }
 
-        const newSuggestion = await Suggestion.create({ title, category, detail, createdBy, upvotes: 0 });
-
-        return newSuggestion;
+        return await createNewSuggestion(title, category, detail, createdBy);
     },
 };
 

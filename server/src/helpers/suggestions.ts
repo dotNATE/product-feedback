@@ -3,6 +3,16 @@ import { SuggestionInstance } from '../Models/Suggestion';
 
 import { getOneUpvote } from './upvotes';
 
+export const createNewSuggestion = async (title: string, category: string, detail: string, createdBy: string) => {
+    return await Suggestion.create({
+        title,
+        category,
+        detail,
+        createdBy,
+        upvotes: 0
+    });
+};
+
 export const getAllSuggestions = async () => {
     return await Suggestion.findAll({
         order: [['createdAt', 'DESC']],
