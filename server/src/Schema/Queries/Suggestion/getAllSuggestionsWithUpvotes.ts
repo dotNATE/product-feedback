@@ -1,22 +1,14 @@
-import { GraphQLList, GraphQLID } from "graphql"
+import { GraphQLList, GraphQLID } from "graphql";
+import { SuggestionWithUpvotesType } from "../../TypeDefs";
 
-import { getAllSuggestions, mapUpvoteCountToSuggestionsByUserId } from "../../../helpers/suggestions";
-import { getUserById } from "../../../helpers/users";
-import { SuggestionWithUpvotesType } from "../../TypeDefs"
+import { resolveGetAllSuggestionsWithUpvotes } from "../../../resolvers/suggestion";
 
 const getAllSuggestionsWithUpvotes = {
     type: new GraphQLList(SuggestionWithUpvotesType),
     args: {
         userId: { type: GraphQLID },
     },
-    resolve: async (_: any, { userId }: any) => {
-        const user = await getUserById(userId);
-        if (!user) throw new Error("User doesn't exist");
-
-        const suggestions = await getAllSuggestions();
-        
-        return await mapUpvoteCountToSuggestionsByUserId(suggestions, userId);
-    },
+    resolve: resolveGetAllSuggestionsWithUpvotes,
 };
 
 export default getAllSuggestionsWithUpvotes;

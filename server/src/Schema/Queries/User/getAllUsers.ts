@@ -1,13 +1,11 @@
 import { GraphQLList } from "graphql"
-
-import { getAllUsers as getAllUsersHelper } from '../../../helpers/users'
 import { UserType } from "../../TypeDefs"
+
+import { resolveGetAllUsers } from "../../../resolvers/user";
 
 const getAllUsers = {
     type: new GraphQLList(UserType),
-    async resolve() {
-        return await getAllUsersHelper();
-    },
+    resolve: resolveGetAllUsers,
 };
 
 export default getAllUsers;
