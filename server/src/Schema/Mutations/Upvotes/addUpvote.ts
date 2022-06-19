@@ -1,8 +1,8 @@
 import { GraphQLID } from "graphql";
 import { Upvote } from "../../../Models";
-import { Op } from 'sequelize';
 
-import { isAuthenticated, refreshUpvoteCount } from '../../../helpers';
+import { isAuthenticated } from '../../../helpers/auth';
+import { refreshUpvoteCount, getOneUpvote } from '../../../helpers/upvotes';
 import { MessageType } from "../../TypeDefs";
 
 const addUpvote = {
@@ -16,14 +16,7 @@ const addUpvote = {
 
             isAuthenticated(authToken);
         
-            const upvote = await Upvote.findOne({
-                where: {
-                    [Op.and]: [
-                        { userId },
-                        { suggestionId }
-                    ],
-                },
-            });
+            const upvote = await getOneUpvote(userId, suggestionId);
         
             if (upvote) {
                 throw new Error("Upvote already exists")
