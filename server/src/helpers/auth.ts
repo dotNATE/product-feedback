@@ -6,7 +6,10 @@ export const checkPassword = async (inputPassword: string, storedPassword: strin
 };
 
 export const generateAccessToken = (userId: string) => {
-    return jwt.sign({ userId }, String(process.env.ACCESS_TOKEN_SECRET), { expiresIn: String(process.env.ACCESS_TOKEN_EXPIRY)});
+    const secret: string = process.env.ACCESS_TOKEN_SECRET || 'secret';
+    const expiry: string = process.env.ACCESS_TOKEN_EXPIRY || '1s';
+
+    return jwt.sign({ userId }, secret, { expiresIn: expiry});
 };
 
 export const hashPassword = async (password: string) => {

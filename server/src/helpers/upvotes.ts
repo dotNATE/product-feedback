@@ -9,7 +9,7 @@ export const createNewUpvote = async (userId: string, suggestionId: string) => {
 };
 
 export const getOneUpvote = async (userId: string, suggestionId: string) => {
-    const upvote = await Upvote.findOne({
+    return await Upvote.findOne({
         where: {
             [Op.and]: [
                 { userId },
@@ -17,8 +17,6 @@ export const getOneUpvote = async (userId: string, suggestionId: string) => {
             ],
         },
     });
-
-    return upvote;
 };
 
 export const refreshUpvoteCount = async (suggestionId: string) => {
