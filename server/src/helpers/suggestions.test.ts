@@ -29,7 +29,7 @@ describe("createNewSuggestion", () => {
 
         expect(spy).toBeCalledTimes(1);
     });
-    it("it calls create with the title, category, detail and createdBy from args and upvotes val of 0", async () => {
+    it("calls create with the title, category, detail and createdBy from args and upvotes val of 0", async () => {
         const spy = jest.spyOn(Suggestion, 'create');
 
         await createNewSuggestion(title, category, detail, createdBy);
@@ -41,5 +41,14 @@ describe("createNewSuggestion", () => {
             createdBy,
             upvotes: 0,
         });
+    });
+    it("returns a suggestion made up of the args + an id", async () => {
+        const suggestion = await createNewSuggestion(title, category, detail, createdBy);
+
+        expect(suggestion.title).toEqual(title);
+        expect(suggestion.category).toEqual(category);
+        expect(suggestion.detail).toEqual(detail);
+        expect(suggestion.createdBy).toEqual(createdBy);
+        expect(suggestion.id).toBeDefined();
     });
 });
