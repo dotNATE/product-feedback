@@ -6,19 +6,6 @@ import { suggestions, users } from '../testData';
 
 import { getAllSuggestions, createNewSuggestion, mapUpvoteCountToSuggestionsByUserId } from './suggestions';
 
-describe("getAllSuggestions", () => {
-    it("tries to find all suggestions in desc order of createdAt", async () => {
-        const spy = jest.spyOn(Suggestion, 'findAll');
-        const filterObject = {
-            order: [['createdAt', 'DESC']],
-        };
-
-        await getAllSuggestions();
-
-        expect(spy).toBeCalledWith(filterObject)
-    });
-});
-
 describe("createNewSuggestion", () => {
     const title = "title";
     const category = "category";
@@ -53,6 +40,19 @@ describe("createNewSuggestion", () => {
         expect(suggestion.detail).toEqual(detail);
         expect(suggestion.createdBy).toEqual(createdBy);
         expect(suggestion.id).toBeDefined();
+    });
+});
+
+describe("getAllSuggestions", () => {
+    it("tries to find all suggestions in desc order of createdAt", async () => {
+        const spy = jest.spyOn(Suggestion, 'findAll');
+        const filterObject = {
+            order: [['createdAt', 'DESC']],
+        };
+
+        await getAllSuggestions();
+
+        expect(spy).toBeCalledWith(filterObject)
     });
 });
 
