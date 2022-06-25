@@ -7,6 +7,14 @@ export const users = [
         username: "Testy",
         password: "secret",
     },
+    {
+        id: "69d41fa0-ef71-4530-8d11-5c87bec55462",
+        firstName: "Test2",
+        lastName: "User2",
+        email: "testuser2@test.com",
+        username: "Testy II",
+        password: "secret",
+    },
 ];
 
 export const upvotes = [
@@ -22,7 +30,7 @@ export const upvotes = [
     },
     {
         id: "815954b4-659c-4816-a373-589da1e9b467",
-        userId: "fb26d3d6-9a08-454f-9859-76a1a24febfb",
+        userId: "69d41fa0-ef71-4530-8d11-5c87bec55462",
         suggestionId: "d01f976e-156e-4a2a-bc4e-44247ec6446b",
     },
 ];

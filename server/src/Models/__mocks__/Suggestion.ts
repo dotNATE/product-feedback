@@ -1,4 +1,4 @@
-import { suggestions } from "./testData";
+import { suggestions } from "../../testData";
 
 export default {
     findAll() {

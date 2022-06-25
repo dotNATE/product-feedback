@@ -1,5 +1,4 @@
 import { Suggestion } from '../Models';
-import { SuggestionInstance } from '../Models/Suggestion';
 
 import { getOneUpvote } from './upvotes';
 
@@ -19,7 +18,16 @@ export const getAllSuggestions = async () => {
     });
 };
 
-export const mapUpvoteCountToSuggestionsByUserId = async (suggestions: SuggestionInstance[], userId: string) => {
+interface SuggestionInterface {
+    id: string;
+    title: string;
+    category: string;
+    detail: string;
+    createdBy: string;
+    upvotes: number;
+}
+
+export const mapUpvoteCountToSuggestionsByUserId = async (suggestions: SuggestionInterface[], userId: string) => {
     return suggestions.map(async suggestion => {
         const { id, title, category, detail, createdBy, upvotes } = suggestion;
         let upvotedByUser = false;

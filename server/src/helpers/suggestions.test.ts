@@ -1,7 +1,10 @@
 jest.mock('../Models/Suggestion');
-import Suggestion from '../Models/Suggestion';
+jest.mock('./upvotes');
 
-import { getAllSuggestions, createNewSuggestion } from './suggestions';
+import Suggestion from '../Models/Suggestion';
+import { suggestions, users } from '../testData';
+
+import { getAllSuggestions, createNewSuggestion, mapUpvoteCountToSuggestionsByUserId } from './suggestions';
 
 describe("getAllSuggestions", () => {
     it("tries to find all suggestions in desc order of createdAt", async () => {
@@ -50,5 +53,16 @@ describe("createNewSuggestion", () => {
         expect(suggestion.detail).toEqual(detail);
         expect(suggestion.createdBy).toEqual(createdBy);
         expect(suggestion.id).toBeDefined();
+    });
+});
+
+describe("mapUpvoteCountToSuggestionsByUserId", () => {
+    it("returns the same number of suggestions that it is given", async () => {
+        const user = users[0];
+        const suggestionCount = suggestions.length;
+
+        const result = await mapUpvoteCountToSuggestionsByUserId(suggestions, user.id);
+
+        expect(result.length).toEqual(suggestionCount);
     });
 });
