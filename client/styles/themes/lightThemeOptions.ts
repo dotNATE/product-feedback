@@ -33,11 +33,12 @@ const lightThemeOptions: ThemeOptions = {
       color: 'rgb(55, 63, 104)',
     },
     h3: {
-        fontSize: '18px',
+      fontSize: '18px',
       fontWeight: '700',
       lineHeight: '26px',
       letterSpacing: '-0.25px',
       color: 'rgb(55, 63, 104)',
+      margin: '0 auto',
     },
     h4: {
       fontSize: '14px',
@@ -49,6 +50,7 @@ const lightThemeOptions: ThemeOptions = {
     subtitle2: {
       fontSize: '14px',
       color: 'rgb(100, 113, 150)',
+      margin: 'auto 0',
     },
     body1: {
       fontSize: '16px',

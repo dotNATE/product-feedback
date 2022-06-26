@@ -3,6 +3,7 @@ import React, { ReactNode } from 'react';
 import { useAppSelector, useAppDispatch } from '../../store/hooks';
 import { selectCreateSuggestion, addSuggestionsToState, selectSuggestions, selectSuggestionFilter, selectSuggestionSort } from '../../store/suggestion';
 import { selectId } from '../../store/auth';
+
 import { useQuery } from '@apollo/client';
 import { getAllSuggestionsWithUpvotesQuery } from '../../graphql/queries';
 

@@ -29,7 +29,7 @@ const FilterPill: React.FC<Props> = ({ label }) => {
         }
     `;
 
-    const handleClick = (): void => {
+    const handleClick: React.MouseEventHandler<HTMLDivElement> = (): void => {
         dispatch(setSuggestionFilter({
             suggestionFilter: label.toLowerCase()
         }));
