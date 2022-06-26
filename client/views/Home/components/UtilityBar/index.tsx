@@ -1,7 +1,9 @@
 import React from 'react';
-import styled from '@emotion/styled';
 import AddSuggestionButton from './components/AddSuggestionButton';
 import LightBulbIcon from './components/LightBulbIcon';
+
+import { Typography } from '@mui/material';
+import styled from '@emotion/styled';
 
 type Props = {
     count: number;
@@ -15,6 +17,10 @@ const UtilityBar: React.FC<Props> = ({ count }) => {
         border-radius: 10px;
         background-color: rgb(55, 63, 104);
         padding: 0.875rem;
+        & h3 {
+            height: auto;
+            margin: auto 0;
+        }
     `;
 
     const FlexRow = styled.div`
@@ -22,17 +28,11 @@ const UtilityBar: React.FC<Props> = ({ count }) => {
         flex-direction: row;
     `;
 
-    const StyledH3 = styled.h3`
-        color: white;
-        height: auto;
-        margin: auto 0;
-    `;
-
     return (
         <Container>
             <FlexRow>
                 <LightBulbIcon />
-                <StyledH3>{ count } Suggestions</StyledH3>
+                <Typography variant='h3' sx={{ color: 'white' }}>{ count } Suggestions</Typography>
             </FlexRow>
             <AddSuggestionButton />
         </Container>

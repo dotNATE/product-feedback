@@ -10,6 +10,8 @@ import { useAppSelector } from '../../../../../store/hooks';
 import { selectId } from '../../../../../store/auth';
 import { getAllSuggestionsWithUpvotesQuery } from '../../../../../graphql/queries';
 
+import { Typography } from '@mui/material';
+
 export type SuggestionType = {
     id: string;
     title: string;
@@ -39,10 +41,6 @@ const Content = styled.div`
     padding: 0 1.75rem;
     align-items: flex-start;
     gap: .275rem;
-`;
-
-const Detail = styled.p`
-    color: rgb(100, 113, 150);
 `;
 
 const CategoryPill = styled.p`
@@ -91,9 +89,11 @@ const Suggestion: React.FC<Props> = ({ suggestion }) => {
                 <Upvote count={ suggestion.upvotes } selected={ suggestion.upvotedByUser } />
             </div>
             <Content>
-                <h3>{ suggestion.title }</h3>
-                <Detail>{ suggestion.detail }</Detail>
-                <CategoryPill className='two'>{ toSentenceCase(suggestion.category) }</CategoryPill>
+                <Typography variant='h3'>{ suggestion.title }</Typography>
+                <Typography variant='subtitle2'>{ suggestion.detail }</Typography>
+                <CategoryPill>
+                    <Typography variant='body2' color='inherit'>{ toSentenceCase(suggestion.category) }</Typography>
+                </CategoryPill>
             </Content>
         </Container>
     );

@@ -3,6 +3,8 @@ import styled from '@emotion/styled';
 import NoSuggestionsIcon from './NoSuggestionsIcon';
 import AddSuggestionButton from '../UtilityBar/components/AddSuggestionButton';
 
+import { Typography } from '@mui/material';
+
 const NoSuggestion: React.FC = () => {
     const Container = styled.div`
         display: flex;
@@ -16,7 +18,7 @@ const NoSuggestion: React.FC = () => {
         border-radius: 10px;
     `;
 
-    const Typography = styled.div`
+    const TypographyContainer = styled.div`
         display: flex;
         flex-direction: column;
         gap: 1.5rem;
@@ -27,10 +29,10 @@ const NoSuggestion: React.FC = () => {
     return (
         <Container>
             <NoSuggestionsIcon />
-            <Typography>
-                <h1>There is no suggestion yet.</h1>
-                <p>Got a suggestion? Found a bug that needs to be squashed? We love hearing about new ideas to improve our app.</p>
-            </Typography>
+                <TypographyContainer>
+                    <Typography variant="h1">There are no suggestions yet.</Typography>
+                    <Typography variant="body1">Got some feedback? Found a bug that needs to be squashed? We love hearing about new ideas to improve our app.</Typography>
+                </TypographyContainer>
             <AddSuggestionButton />
         </Container>
     );

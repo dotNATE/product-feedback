@@ -2,7 +2,6 @@ import React from 'react';
 
 import styled from '@emotion/styled';
 
-import CustomButton from '../../components/buttons/Button';
 import { Button } from '@mui/material';
 
 import PlusIcon from '../../components/icons/PlusIcon';
@@ -32,14 +31,6 @@ const Style: React.FC = ({}) => {
     return (
         <Container>
             <h1>Style</h1>
-            <div>
-                <h3>Custom Buttons</h3>
-                <ButtonContainer>
-                    <CustomButton label='Button'  />
-                    <CustomButton label='Submit' style='submit' />
-                    <CustomButton label='Warning' style='warning' />
-                </ButtonContainer>
-            </div>
             <RowContainer>
                 <div>
                     <h3>Mui Buttons</h3>

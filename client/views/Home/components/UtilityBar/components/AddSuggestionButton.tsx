@@ -1,7 +1,7 @@
 import { useAppDispatch } from '../../../../../store/hooks';
 import { openCreateSuggestion } from '../../../../../store/suggestion';
 
-import Button from '../../../../../components/buttons/Button';
+import { Button } from '@mui/material';
 import PlusIcon from '../../../../../components/icons/PlusIcon';
 
 const AddSuggestionButton: React.FC = ({}) => {
@@ -12,7 +12,7 @@ const AddSuggestionButton: React.FC = ({}) => {
     };
     
     return (
-        <Button label='Add Suggestion' style='submit' icon={<PlusIcon />} onClick={handleClick} />
+        <Button color='primary' variant="contained" startIcon={<PlusIcon />} onClick={handleClick}>Add Suggestion</Button>
     );
 };
 

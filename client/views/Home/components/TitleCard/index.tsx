@@ -1,6 +1,8 @@
 import React from 'react';
 import styled from '@emotion/styled';
 
+import { Typography } from '@mui/material';
+
 type Props = {
     title: string,
     subtitle: string,
@@ -17,17 +19,10 @@ const TitleCard: React.FC<Props> = ({ title, subtitle }) => {
         padding: 4rem 1.5rem 2rem 1.5rem;
     `;
 
-    const WhiteH2 = styled.h2`
-        color: white;
-    `;
-
-    const GreyH4 = styled.h4`
-        color: rgb(255, 255, 255, .75);
-    `;
     return (
         <Container>
-            <WhiteH2>{ title }</WhiteH2>
-            <GreyH4>{ subtitle }</GreyH4>
+            <Typography variant='h2' sx={{ color: 'white' }}>{ title }</Typography>
+            <Typography variant='h4' sx={{ color: 'rgb(255, 255, 255, .75)' }}>{ subtitle }</Typography>
         </Container>
     );
 };
