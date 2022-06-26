@@ -5,6 +5,9 @@ import styled from '@emotion/styled';
 import CustomButton from '../../components/buttons/Button';
 import { Button } from '@mui/material';
 
+import PlusIcon from '../../components/icons/PlusIcon';
+import ChevronIcon from '../../components/icons/ChevronIcon';
+
 const Container = styled.div`
     display: flex;
     flex-direction: column;
@@ -80,6 +83,19 @@ const Style: React.FC = ({}) => {
                         <Button color='error' variant='outlined'>Error</Button>
                         <Button color='warning' variant='outlined'>Warning</Button>
                         <Button color='info' variant='outlined'>Info</Button>
+                    </ButtonContainer>
+                </div>
+            </RowContainer>
+            <RowContainer>
+                <div>
+                    <h3>Mui Buttons - Icons</h3>
+                    <ButtonContainer>
+                        <Button color='primary' variant='contained' startIcon={<PlusIcon />}>Primary</Button>
+                        <Button color='secondary' variant='contained' startIcon={<ChevronIcon />}>Secondary</Button>
+                        <Button color='success' variant='contained' endIcon={<PlusIcon />}>Success</Button>
+                        <Button color='error' variant='contained' endIcon={<ChevronIcon />}>Error</Button>
+                        <Button color='warning' variant='outlined' startIcon={<ChevronIcon color='#ed6c02' />}>Warning</Button>
+                        <Button color='info' variant='outlined' endIcon={<ChevronIcon color='#0288D1' />}>Info</Button>
                     </ButtonContainer>
                 </div>
             </RowContainer>
