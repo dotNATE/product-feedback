@@ -40,11 +40,6 @@ const SelectField: React.FC<Props> = ({ name, description, label, error, childre
         }
     `;
 
-    const Description = styled.p`
-        font-size: 14px;
-        color: rgb(100, 113, 150);
-    `;
-
     const ErrorMessage = styled.p`
         color: rgb(215, 55, 55);
         font-size: 14px;
