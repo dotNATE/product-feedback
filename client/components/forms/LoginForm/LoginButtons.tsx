@@ -1,7 +1,7 @@
 import { useRouter } from "next/router";
 
+import { Button } from '@mui/material';
 import ButtonContainer from "../../buttons/ButtonContainer";
-import Button from "../../buttons/Button";
 
 const LoginButtons: React.FC = ({}) => {
     const router = useRouter();
@@ -13,8 +13,8 @@ const LoginButtons: React.FC = ({}) => {
 
     return (
         <ButtonContainer>
-            <Button label='Go to register' onClick={handleGoToRegister} />
-            <Button label='Login' style='submit' type="submit" />
+            <Button variant="contained" color="secondary" onClick={handleGoToRegister}>Go to register</Button>
+            <Button variant="contained" color="primary" type="submit">Login</Button>
         </ButtonContainer>
     );
 };

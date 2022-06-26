@@ -38,7 +38,7 @@ const Home: React.FC = ({}) => {
     const createSuggestionOpen = useAppSelector(selectCreateSuggestion);
 
     const Suggestions: React.FC = () => {
-        return filteredSuggestions && filteredSuggestions.length > 0 ? <SuggestionList suggestion={filteredSuggestions} /> : <NoSuggestions />;
+        return filteredSuggestions && filteredSuggestions.length > 0 ? <SuggestionList suggestion={ filteredSuggestions } /> : <NoSuggestions />;
     };
 
     const PrimaryColumnContent: ReactNode = <>

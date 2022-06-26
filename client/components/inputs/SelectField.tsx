@@ -1,6 +1,8 @@
 import React, { ReactNode } from 'react';
 import { Field } from 'formik';
+
 import styled from '@emotion/styled';
+import { Typography } from '@mui/material';
 
 type Props = {
     name: string;
@@ -38,11 +40,6 @@ const SelectField: React.FC<Props> = ({ name, description, label, error, childre
         }
     `;
 
-    const Description = styled.p`
-        font-size: 14px;
-        color: rgb(100, 113, 150);
-    `;
-
     const ErrorMessage = styled.p`
         color: rgb(215, 55, 55);
         font-size: 14px;
@@ -53,10 +50,10 @@ const SelectField: React.FC<Props> = ({ name, description, label, error, childre
         <Container>
             {label && 
                 <label htmlFor={name}>
-                    <h4>{label}</h4>
+                    <Typography variant='h4'>{ label }</Typography>
                 </label>
             }
-            {description && <Description>{description}</Description>}
+            {description && <Typography variant='subtitle2'>{description}</Typography>}
             <SelectWrapper>
                 <Select
                     id={name} 

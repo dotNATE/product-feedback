@@ -1,7 +1,10 @@
 import React from 'react';
-import styled from '@emotion/styled';
+
 import { useAppSelector, useAppDispatch } from '../../../../store/hooks';
 import { selectSuggestionFilter, setSuggestionFilter } from '../../../../store/suggestion';
+
+import styled from '@emotion/styled';
+import { Typography } from '@mui/material';
 
 type Props = {
     label: string,
@@ -12,7 +15,7 @@ const FilterPill: React.FC<Props> = ({ label }) => {
     const suggestionFilter = useAppSelector(selectSuggestionFilter);
     const selected = label.toLowerCase() === suggestionFilter;
 
-    const StyledP = styled.p`
+    const Wrapper = styled.div`
         background-color: ${ selected ? 'rgb(70, 97, 230)' : 'rgb(242, 244, 255)' };
         color: ${ selected ? 'white' : 'rgb(70, 97, 230)'};
         padding: 0.6875rem 1.25rem;
@@ -33,7 +36,9 @@ const FilterPill: React.FC<Props> = ({ label }) => {
     };
 
     return (
-        <StyledP className='two' onClick={handleClick}>{ label }</StyledP>
+        <Wrapper className='two' onClick={handleClick}>
+            <Typography variant='body2' color='inherit'>{ label }</Typography>
+        </Wrapper>
     );
 };
 

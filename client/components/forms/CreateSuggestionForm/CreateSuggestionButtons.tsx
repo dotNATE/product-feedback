@@ -1,8 +1,8 @@
 import { useAppDispatch } from '../../../store/hooks';
 import { closeCreateSuggestion } from '../../../store/suggestion';
 
+import { Button } from '@mui/material';
 import ButtonContainer from "../../buttons/ButtonContainer";
-import Button from "../../buttons/Button";
 
 const CreateSuggestionButtons: React.FC = ({}) => {
     const dispatch = useAppDispatch();
@@ -13,8 +13,8 @@ const CreateSuggestionButtons: React.FC = ({}) => {
 
     return (
         <ButtonContainer>
-            <Button label='Cancel' onClick={handleCloseModal} />
-            <Button label='Add Suggestion' style='submit' type='submit' />
+            <Button variant="contained" color="secondary" onClick={handleCloseModal}>Cancel</Button>
+            <Button variant="contained" color="primary" type="submit">Add Suggestion</Button>
         </ButtonContainer>
     );
 };
