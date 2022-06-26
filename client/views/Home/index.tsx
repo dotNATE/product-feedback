@@ -39,7 +39,7 @@ const Home: React.FC = ({}) => {
     const Suggestions: React.FC = () => {
         if (loading || !filteredSuggestions || filteredSuggestions.length < 1) return <NoSuggestions />
 
-        return <SuggestionList suggestion={filteredSuggestions} />;
+        return <SuggestionList suggestion={ filteredSuggestions } />;
     };
 
     const PrimaryColumnContent: ReactNode = <>

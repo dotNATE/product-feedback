@@ -1,6 +1,8 @@
 import React, { ReactNode } from 'react';
 import { Formik, Form } from 'formik';
 
+import { Typography } from '@mui/material';
+
 type Props = {
     name: string;
     initialValues: any;
@@ -16,10 +18,9 @@ const ModalForm: React.FC<Props> = ({ name, initialValues, handleSubmit, inputs,
             onSubmit={handleSubmit}
         >
             <>
-                <h1>{ name }</h1>
+                <Typography variant='h1'>{ name }</Typography>
                 <Form>
                     { inputs }
-
                     { buttons }
                 </Form>
             </>
