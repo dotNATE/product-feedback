@@ -6,7 +6,7 @@ import { Button } from '@mui/material';
 
 import PlusIcon from '../../components/icons/PlusIcon';
 import ChevronUpIcon from '../../components/icons/ChevronUpIcon';
-import { Dropdown } from '../Home/components/UtilityBar';
+import SortByDropdown from '../Home/components/UtilityBar/components/SortByDropdown';
 
 const Container = styled.div`
     display: flex;
@@ -93,7 +93,7 @@ const Style: React.FC = ({}) => {
                 </div>
             </RowContainer>
             <RowContainer>
-                <Dropdown show={true} />
+                <SortByDropdown show={true} />
             </RowContainer>
         </Container>
     );
