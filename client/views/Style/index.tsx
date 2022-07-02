@@ -6,7 +6,7 @@ import { Button } from '@mui/material';
 
 import PlusIcon from '../../components/icons/PlusIcon';
 import ChevronUpIcon from '../../components/icons/ChevronUpIcon';
-import SortByDropdown from '../Home/components/UtilityBar/components/SortByDropdown';
+import SortByDropdown from '../Home/components/UtilityBar/components/SortByWidget/SortByDropdown';
 
 const Container = styled.div`
     display: flex;

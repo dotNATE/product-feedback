@@ -1,9 +1,9 @@
-import { useAppSelector, useAppDispatch } from '../../../../../store/hooks';
-import { selectSuggestionSortLabel, setSuggestionSort } from '../../../../../store/suggestion';
+import { useAppSelector, useAppDispatch } from '../../../../../../store/hooks';
+import { selectSuggestionSortLabel, setSuggestionSort } from '../../../../../../store/suggestion';
 import { Typography, ButtonGroup, Button, Collapse } from '@mui/material';
 import { useTheme } from '@mui/material/styles';
-import CheckIcon from '../../../../../components/icons/Check';
-import { SuggestionType } from '../../SuggestionList/Suggestion';
+import CheckIcon from '../../../../../../components/icons/Check';
+import { SuggestionType } from '../../../SuggestionList/Suggestion';
 
 type DropdownProps = {
     show: boolean,
