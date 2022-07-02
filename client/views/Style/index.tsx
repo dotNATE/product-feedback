@@ -5,7 +5,8 @@ import styled from '@emotion/styled';
 import { Button } from '@mui/material';
 
 import PlusIcon from '../../components/icons/PlusIcon';
-import ChevronIcon from '../../components/icons/ChevronIcon';
+import ChevronUpIcon from '../../components/icons/ChevronUpIcon';
+import { Dropdown } from '../Home/components/UtilityBar';
 
 const Container = styled.div`
     display: flex;
@@ -19,6 +20,7 @@ const RowContainer = styled.div`
     grid-template-columns: repeat(3, 1fr);
     gap: .75rem;
     width: 100%;
+    position: relative;
 `
 
 const ButtonContainer = styled.div`
@@ -82,13 +84,16 @@ const Style: React.FC = ({}) => {
                     <h3>Mui Buttons - Icons</h3>
                     <ButtonContainer>
                         <Button color='primary' variant='contained' startIcon={<PlusIcon />}>Primary</Button>
-                        <Button color='secondary' variant='contained' startIcon={<ChevronIcon />}>Secondary</Button>
+                        <Button color='secondary' variant='contained' startIcon={<ChevronUpIcon />}>Secondary</Button>
                         <Button color='success' variant='contained' endIcon={<PlusIcon />}>Success</Button>
-                        <Button color='error' variant='contained' endIcon={<ChevronIcon />}>Error</Button>
-                        <Button color='warning' variant='outlined' startIcon={<ChevronIcon color='#ed6c02' />}>Warning</Button>
-                        <Button color='info' variant='outlined' endIcon={<ChevronIcon color='#0288D1' />}>Info</Button>
+                        <Button color='error' variant='contained' endIcon={<ChevronUpIcon />}>Error</Button>
+                        <Button color='warning' variant='outlined' startIcon={<ChevronUpIcon color='#ed6c02' />}>Warning</Button>
+                        <Button color='info' variant='outlined' endIcon={<ChevronUpIcon color='#0288D1' />}>Info</Button>
                     </ButtonContainer>
                 </div>
+            </RowContainer>
+            <RowContainer>
+                <Dropdown show={true} />
             </RowContainer>
         </Container>
     );

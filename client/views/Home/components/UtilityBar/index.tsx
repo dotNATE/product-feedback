@@ -1,23 +1,94 @@
-import React from 'react';
+import React, { useState } from 'react';
 import AddSuggestionButton from './components/AddSuggestionButton';
 
 import { useAppSelector, useAppDispatch } from '../../../../store/hooks';
 import { selectSuggestionSortLabel, setSuggestionSort } from '../../../../store/suggestion';
 
-import { Typography } from '@mui/material';
+import { Typography, ButtonGroup, Button, Collapse, ClickAwayListener } from '@mui/material';
+import { useTheme } from '@mui/material/styles';
 import styled from '@emotion/styled';
 
 import LightBulbIcon from './components/LightBulbIcon';
 import ChevronDownIcon from '../../../../components/icons/ChevronDownIcon';
+import CheckIcon from '../../../../components/icons/Check';
 import { SuggestionType } from '../SuggestionList/Suggestion';
 
 type Props = {
     count: number;
 };
 
-const UtilityBar: React.FC<Props> = ({ count }) => {
+type DropdownProps = {
+    show: boolean,
+};
+
+export const Dropdown: React.FC<DropdownProps> = ({ show }) => {
     const dispatch = useAppDispatch();
     const sortLabel = useAppSelector(selectSuggestionSortLabel);
+    const theme = useTheme();
+
+    console.log('theme: ', theme);
+    console.log('theme.palette.primary.main: ', theme.palette.primary.main);
+
+    const leastUpvotes = setSuggestionSort({
+        sort: (a: SuggestionType, b: SuggestionType) => a.upvotes - b.upvotes,
+        label: "Least Upvotes",
+    });
+
+    const mostUpvotes = setSuggestionSort({
+        sort: (a: SuggestionType, b: SuggestionType) => b.upvotes - a.upvotes,
+        label: "Most Upvotes",
+    });
+
+    const actions = [
+        mostUpvotes,
+        leastUpvotes,
+    ];
+
+    const handleClick: React.MouseEventHandler<HTMLSpanElement> = (e: React.MouseEvent<HTMLSpanElement, MouseEvent>) => {
+        // @ts-ignore 
+        const selectedFilter: string = e.target.innerText;
+
+        const action = actions.find(el => el.payload.label === selectedFilter);
+        if (!action) {
+            return;
+        }
+
+        dispatch(action);
+    };
+
+    const buttonStyles = {
+        backgroundColor: 'white',
+        '&:hover': {
+            backgroundColor: 'white',
+            '& p': {
+                color: theme.palette.primary.main,
+            },
+        },
+    };
+
+    return (
+        <Collapse in={show} sx={{ position: 'absolute', top: '2.325rem', left: '4rem' }}>
+            <ButtonGroup orientation='vertical'>
+                {
+                    actions.map((action, index) => {
+                        const { label } = action.payload
+                        const selected = label === sortLabel;
+
+                        return (
+                            <Button variant='outlined' endIcon={ selected ? <CheckIcon /> : null } onClick={ handleClick } key={ `sort_button_${index}` } sx={buttonStyles}>
+                                <Typography variant='body1' sx={{ whiteSpace: 'nowrap' }}>{ label }</Typography>
+                            </Button>
+                        );
+                    })
+                }
+            </ButtonGroup>
+        </Collapse>
+    );
+};
+
+const UtilityBar: React.FC<Props> = ({ count }) => {
+    const sortLabel = useAppSelector(selectSuggestionSortLabel);
+
     const Container = styled.div`
         display: flex;
         justify-content: space-between;
@@ -35,37 +106,32 @@ const UtilityBar: React.FC<Props> = ({ count }) => {
     `;
 
     const SortByWidget: React.FC = () => {
-        const handleClick: React.MouseEventHandler<HTMLSpanElement> = () => {
-            const leastUpvotes = setSuggestionSort({
-                sort: (a: SuggestionType, b: SuggestionType) => a.upvotes - b.upvotes,
-                label: "Least Upvotes",
-            });
-
-            const mostUpvotes = setSuggestionSort({
-                sort: (a: SuggestionType, b: SuggestionType) => b.upvotes - a.upvotes,
-                label: "Most Upvotes",
-            });
-
-            let action = leastUpvotes;
-            if (sortLabel === "Least Upvotes") action = mostUpvotes;
-
-            dispatch(action);
-        };
+        const [selectSortOpen, setSelectSortOpen] = useState(false);
 
         const FlexRow2 = styled.div`
             display: flex;
             flex-direction: row;
             align-items: center;
             gap: .5rem;
-        `; 
+            position: relative;
+        `;
+
+        const FlexRow3 = styled.div`
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            gap: .5rem;
+            cursor: pointer;
+        `;
 
         return (
             <FlexRow2>
                 <Typography variant='subtitle2' sx={{ color: 'white' }}>Sort by :</Typography>
-                <FlexRow2 onClick={ handleClick }>
+                <FlexRow3 onClick={() => setSelectSortOpen(true)}>
                     <Typography variant='subtitle2' sx={{ color: 'white', fontWeight: '600' }}>{ sortLabel }</Typography>
                     <ChevronDownIcon color='white' />
-                </FlexRow2>
+                </FlexRow3>
+                <Dropdown show={selectSortOpen} />
             </FlexRow2>
         );
     };
