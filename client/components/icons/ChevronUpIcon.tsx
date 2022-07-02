@@ -4,7 +4,7 @@ type Props = {
     color?: string;
 };
 
-const ChevronIcon: React.FC<Props> = ({ color }) => {
+const ChevronUpIcon: React.FC<Props> = ({ color }) => {
     const Container = styled.div`
         display: flex;
         align-items: center;
@@ -18,4 +18,4 @@ const ChevronIcon: React.FC<Props> = ({ color }) => {
     );
 };
 
-export default ChevronIcon;
+export default ChevronUpIcon;
