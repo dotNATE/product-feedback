@@ -12,7 +12,6 @@ import UtilityBar from './components/UtilityBar';
 import NoSuggestions from './components/NoSuggestions';
 import SuggestionList from './components/SuggestionList';
 import CreateSuggestionForm from '@components/forms/CreateSuggestionForm';
-import Modal from '@components/Modal';
 import TitleCard from './components/TitleCard';
 import FilterCard from './components/FilterCard';
 
@@ -53,7 +52,7 @@ const Home: React.FC = ({}) => {
         <FilterCard />
     </>;
 
-    const Form: ReactNode = createSuggestionOpen ? <Modal><CreateSuggestionForm /></Modal> : null;
+    const Form: ReactNode = createSuggestionOpen ? <CreateSuggestionForm /> : null;
 
     return (
         <Layout primaryColumnContent={PrimaryColumnContent} secondaryColumnContent={SecondaryColumnContent} modal={Form} />

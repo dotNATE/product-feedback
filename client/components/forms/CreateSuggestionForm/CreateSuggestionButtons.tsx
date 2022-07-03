@@ -13,7 +13,7 @@ const CreateSuggestionButtons: React.FC = ({}) => {
 
     return (
         <ButtonContainer>
-            <Button variant="contained" color="secondary" onClick={handleCloseModal}>Cancel</Button>
+            <Button variant="contained" color="secondary" onClick={ handleCloseModal }>Cancel</Button>
             <Button variant="contained" color="primary" type="submit">Add Suggestion</Button>
         </ButtonContainer>
     );

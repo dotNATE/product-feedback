@@ -76,7 +76,15 @@ const lightThemeOptions: ThemeOptions = {
         },
       },
     },
-  }
+    MuiDialog: {
+      styleOverrides: {
+        paper: {
+          borderRadius: '10px',
+          padding: '3.5rem 4rem',
+        },
+      },
+    },
+  },
 };
 
 export default lightThemeOptions;
