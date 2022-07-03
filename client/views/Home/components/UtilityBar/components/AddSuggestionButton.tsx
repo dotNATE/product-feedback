@@ -1,8 +1,8 @@
-import { useAppDispatch } from '../../../../../store/hooks';
-import { openCreateSuggestion } from '../../../../../store/suggestion';
+import { useAppDispatch } from '@store/hooks';
+import { openCreateSuggestion } from '@store/suggestion';
 
 import { Button } from '@mui/material';
-import PlusIcon from '../../../../../components/icons/PlusIcon';
+import PlusIcon from '@components/icons/PlusIcon';
 
 const AddSuggestionButton: React.FC = ({}) => {
     const dispatch = useAppDispatch();

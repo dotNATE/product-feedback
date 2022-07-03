@@ -1,27 +1,26 @@
 import React, { ReactNode } from 'react';
 
-import { useAppSelector, useAppDispatch } from '../../store/hooks';
-import { selectCreateSuggestion, addSuggestionsToState, selectSuggestions, selectSuggestionFilter } from '../../store/suggestion';
-import { selectId } from '../../store/auth';
+import { useAppSelector, useAppDispatch } from '@store/hooks';
+import { selectCreateSuggestion, addSuggestionsToState, selectSuggestions, selectSuggestionFilter, selectSuggestionSort } from '@store/suggestion';
+import { selectId } from '@store/auth';
+
 import { useQuery } from '@apollo/client';
-import { getAllSuggestionsWithUpvotesQuery } from '../../graphql/queries';
+import { getAllSuggestionsWithUpvotesQuery } from '@graphql/queries';
 
 import Layout from './components/Layout';
 import UtilityBar from './components/UtilityBar';
 import NoSuggestions from './components/NoSuggestions';
 import SuggestionList from './components/SuggestionList';
-import CreateSuggestionForm from '../../components/forms/CreateSuggestionForm';
-import Modal from '../../components/Modal';
+import CreateSuggestionForm from '@components/forms/CreateSuggestionForm';
+import Modal from '@components/Modal';
 import TitleCard from './components/TitleCard';
 import FilterCard from './components/FilterCard';
-
-import type { SuggestionType } from './components/SuggestionList/Suggestion';
 
 const Home: React.FC = ({}) => {
     const dispatch = useAppDispatch();
     const suggestions = useAppSelector(selectSuggestions);
     const userId = useAppSelector(selectId);
-    let filteredSuggestions: SuggestionType[];
+    const sortFunc = useAppSelector(selectSuggestionSort);
     const suggestionFilter = useAppSelector(selectSuggestionFilter);
 
     const { loading } = useQuery(getAllSuggestionsWithUpvotesQuery, {
@@ -33,12 +32,15 @@ const Home: React.FC = ({}) => {
         },
     });
 
-    filteredSuggestions = suggestionFilter !== 'all' ? suggestions.filter((el) => el.category === suggestionFilter) : suggestions;
+    let filteredSuggestions = suggestionFilter !== 'all' ? suggestions.filter((el) => el.category === suggestionFilter) : suggestions.map(el => el);
+    filteredSuggestions.sort(sortFunc);
 
     const createSuggestionOpen = useAppSelector(selectCreateSuggestion);
 
     const Suggestions: React.FC = () => {
-        return filteredSuggestions && filteredSuggestions.length > 0 ? <SuggestionList suggestion={ filteredSuggestions } /> : <NoSuggestions />;
+        if (loading || !filteredSuggestions || filteredSuggestions.length < 1) return <NoSuggestions />
+
+        return <SuggestionList suggestion={ filteredSuggestions } />;
     };
 
     const PrimaryColumnContent: ReactNode = <>

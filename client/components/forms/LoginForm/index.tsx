@@ -1,7 +1,7 @@
 import { useMutation } from '@apollo/client';
-import { useAppDispatch } from '../../../store/hooks';
-import { login as reduxLogin } from '../../../store/auth';
-import { loginWithEmailMutation } from '../../../graphql/mutations';
+import { useAppDispatch } from '@store/hooks';
+import { login as reduxLogin } from '@store/auth';
+import { loginWithEmailMutation } from '@graphql/mutations';
 
 import ModalForm from "../FormWrapper";
 import LoginButtons from './LoginButtons';

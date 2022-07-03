@@ -5,7 +5,7 @@ const LightbulbIcon: React.FC = () => {
         display: flex;
         align-items: center;
         height: auto;
-        margin: auto 1rem;
+        margin: auto;
     `;
 
     return (

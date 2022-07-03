@@ -1,16 +1,17 @@
 import React from 'react';
-import { useMutation } from '@apollo/client';
-import { createSuggestionsMutation } from '../../../graphql/mutations';
 
-import { useAppDispatch, useAppSelector } from '../../../store/hooks';
-import { closeCreateSuggestion } from '../../../store/suggestion';
-import { client } from '../../../pages/_app';
+import { client } from '@pages/_app';
+import { useMutation } from '@apollo/client';
+import { createSuggestionsMutation } from '@graphql/mutations';
+import getAllSuggestionsWithUpvotes from '@graphql/queries/suggestions/getAllSuggestionsWithUpvotes';
+
+import { useAppDispatch, useAppSelector } from '@store/hooks';
+import { selectId } from '@store/auth';
+import { closeCreateSuggestion } from '@store/suggestion';
 
 import ModalForm from '../FormWrapper';
 import CreateSuggestionButtons from './CreateSuggestionButtons';
 import CreateSuggestionInputs from './CreateSuggestionInputs';
-import getAllSuggestionsWithUpvotes from '../../../graphql/queries/suggestions/getAllSuggestionsWithUpvotes';
-import { selectId } from '../../../store/auth';
 
 interface Values {
     title: string;

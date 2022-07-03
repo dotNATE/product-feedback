@@ -1,5 +1,5 @@
 import styled from '@emotion/styled';
-import ChevronIcon from '../../../../../../components/icons/ChevronIcon';
+import ChevronUpIcon from '../../../../../../components/icons/ChevronUpIcon';
 
 import { Typography } from '@mui/material';
 
@@ -28,7 +28,7 @@ const Suggestion: React.FC<Props> = ({ count, selected }) => {
 
     return (
         <Container>
-            <ChevronIcon color={ selected ? 'white' : 'rgb(70, 97, 230)' } />
+            <ChevronUpIcon color={ selected ? 'white' : 'rgb(70, 97, 230)' } />
             <Typography variant='body2'>{ count }</Typography>
         </Container>
     );

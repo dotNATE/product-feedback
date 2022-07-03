@@ -1,7 +1,7 @@
 import React from "react";
 
-import InputContainer from "../../inputs/InputContainer";
-import InputField from "../../inputs/InputField";
+import InputContainer from "@components/inputs/InputContainer";
+import InputField from "@components/inputs/InputField";
 
 const LoginInputs: React.FC = () => {
     return (
