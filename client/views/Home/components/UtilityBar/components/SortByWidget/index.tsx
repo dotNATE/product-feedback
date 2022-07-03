@@ -1,10 +1,12 @@
 import styled from "@emotion/styled";
-import { Typography } from "@mui/material";
 import { useState } from "react";
-import ChevronDownIcon from "../../../../../../components/icons/ChevronDownIcon";
-import SortByDropdown from "./SortByDropdown";
 import { useAppSelector } from '../../../../../../store/hooks';
 import { selectSuggestionSortLabel } from '../../../../../../store/suggestion';
+
+import { Typography, ClickAwayListener } from "@mui/material";
+
+import ChevronDownIcon from "../../../../../../components/icons/ChevronDownIcon";
+import SortByDropdown from "./SortByDropdown";
 
 const SortByWidget: React.FC = () => {
     const sortLabel = useAppSelector(selectSuggestionSortLabel);
@@ -26,14 +28,22 @@ const SortByWidget: React.FC = () => {
         cursor: pointer;
     `;
 
+    const handleClickAway = () => {
+        setSelectSortOpen(false);
+    };
+
     return (
         <FlexRow2>
-            <Typography variant='subtitle2' sx={{ color: 'white' }}>Sort by :</Typography>
+            <Typography variant='subtitle2' sx={{ color: 'white' }} onClick={() => setSelectSortOpen(false)}>Sort by :</Typography>
             <FlexRow3 onClick={() => setSelectSortOpen(true)}>
                 <Typography variant='subtitle2' sx={{ color: 'white', fontWeight: '600' }}>{ sortLabel }</Typography>
                 <ChevronDownIcon color='white' />
             </FlexRow3>
-            <SortByDropdown show={selectSortOpen} />
+            <ClickAwayListener onClickAway={handleClickAway}>
+                <div>
+                    <SortByDropdown show={selectSortOpen} />
+                </div>
+            </ClickAwayListener>
         </FlexRow2>
     );
 };
