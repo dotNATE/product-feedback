@@ -1,7 +1,7 @@
 import { useRouter } from "next/router";
 
 import { Button } from '@mui/material';
-import ButtonContainer from "../../buttons/ButtonContainer";
+import ButtonContainer from "@components/buttons/ButtonContainer";
 
 const LoginButtons: React.FC = ({}) => {
     const router = useRouter();

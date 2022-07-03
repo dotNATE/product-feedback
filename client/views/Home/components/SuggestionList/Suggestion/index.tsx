@@ -1,14 +1,14 @@
 import styled from '@emotion/styled';
 import Upvote from "./components/Upvote";
 
-import { client } from '../../../../../pages/_app';
+import { client } from '@pages/_app';
 import { useMutation } from '@apollo/client';
-import addUpvote from '../../../../../graphql/mutations/upvotes/addUpvote';
-import removeUpvote from '../../../../../graphql/mutations/upvotes/removeUpvote';
+import addUpvote from '@graphql/mutations/upvotes/addUpvote';
+import removeUpvote from '@graphql/mutations/upvotes/removeUpvote';
+import { getAllSuggestionsWithUpvotesQuery } from '@graphql/queries';
 
-import { useAppSelector } from '../../../../../store/hooks';
-import { selectId } from '../../../../../store/auth';
-import { getAllSuggestionsWithUpvotesQuery } from '../../../../../graphql/queries';
+import { useAppSelector } from '@store/hooks';
+import { selectId } from '@store/auth';
 
 import { Typography } from '@mui/material';
 

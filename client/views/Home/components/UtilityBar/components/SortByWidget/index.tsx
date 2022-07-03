@@ -1,11 +1,12 @@
 import styled from "@emotion/styled";
+
 import { useState } from "react";
-import { useAppSelector } from '../../../../../../store/hooks';
-import { selectSuggestionSortLabel } from '../../../../../../store/suggestion';
+import { useAppSelector } from '@store/hooks';
+import { selectSuggestionSortLabel } from '@store/suggestion';
 
 import { Typography, ClickAwayListener } from "@mui/material";
 
-import ChevronDownIcon from "../../../../../../components/icons/ChevronDownIcon";
+import ChevronDownIcon from "@components/icons/ChevronDownIcon";
 import SortByDropdown from "./SortByDropdown";
 
 const SortByWidget: React.FC = () => {

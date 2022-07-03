@@ -1,5 +1,5 @@
-import { useAppSelector, useAppDispatch } from '../store/hooks';
-import { selectSuggestionSortLabel } from '../store/suggestion';
+import { useAppSelector, useAppDispatch } from '@store/hooks';
+import { selectSuggestionSortLabel } from '@store/suggestion';
 
 import { Typography, ButtonGroup, Button, Collapse } from '@mui/material';
 import { useTheme } from '@mui/material/styles';

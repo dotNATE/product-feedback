@@ -1,6 +1,6 @@
-import InputContainer from "../../inputs/InputContainer";
-import InputField from "../../inputs/InputField";
-import SelectField from "../../inputs/SelectField";
+import InputContainer from "@components/inputs/InputContainer";
+import InputField from "@components/inputs/InputField";
+import SelectField from "@components/inputs/SelectField";
 
 const CreateSuggestionInputs: React.FC = () => {
     return (

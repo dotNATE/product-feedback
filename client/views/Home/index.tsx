@@ -1,18 +1,18 @@
 import React, { ReactNode } from 'react';
 
-import { useAppSelector, useAppDispatch } from '../../store/hooks';
-import { selectCreateSuggestion, addSuggestionsToState, selectSuggestions, selectSuggestionFilter, selectSuggestionSort } from '../../store/suggestion';
-import { selectId } from '../../store/auth';
+import { useAppSelector, useAppDispatch } from '@store/hooks';
+import { selectCreateSuggestion, addSuggestionsToState, selectSuggestions, selectSuggestionFilter, selectSuggestionSort } from '@store/suggestion';
+import { selectId } from '@store/auth';
 
 import { useQuery } from '@apollo/client';
-import { getAllSuggestionsWithUpvotesQuery } from '../../graphql/queries';
+import { getAllSuggestionsWithUpvotesQuery } from '@graphql/queries';
 
 import Layout from './components/Layout';
 import UtilityBar from './components/UtilityBar';
 import NoSuggestions from './components/NoSuggestions';
 import SuggestionList from './components/SuggestionList';
-import CreateSuggestionForm from '../../components/forms/CreateSuggestionForm';
-import Modal from '../../components/Modal';
+import CreateSuggestionForm from '@components/forms/CreateSuggestionForm';
+import Modal from '@components/Modal';
 import TitleCard from './components/TitleCard';
 import FilterCard from './components/FilterCard';
 
