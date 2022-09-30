@@ -3,7 +3,7 @@ import 'dotenv/config';
 import express from 'express';
 import { graphqlHTTP } from 'express-graphql';
 import cors from 'cors';
-import { schema } from './Schema'
+import { schema } from './Schema';
 import { sequelize } from './Models/sequelize';
 
 const main = async () => {
@@ -13,7 +13,7 @@ const main = async () => {
 
   app.use(
     '/graphql',
-    graphqlHTTP((request) => ({
+    graphqlHTTP(request => ({
       schema,
       context: {
         authToken: request.headers.authorization,
@@ -21,8 +21,8 @@ const main = async () => {
       graphiql: {
         headerEditorEnabled: true,
       },
-    }),
-  ));
+    }))
+  );
   sequelize.sync();
 
   app.listen(process.env.PORT_NUM, () => {
@@ -30,6 +30,6 @@ const main = async () => {
   });
 };
 
-main().catch((err) => {
+main().catch(err => {
   console.error(err);
 });

@@ -7,6 +7,8 @@
     "start": "node ./dist/index.ts",
     "dev": "nodemon ./src/index.ts",
     "test": "NODE_ENV='test' jest --config ./jest.config.ts --coverage",
+    "lint": "eslint --ext .js,.ts .",
+    "format": "prettier --ignore-path .gitignore --write \"**/*.+(js|ts|json)\"",
     "build": "tsc -p ."
   },
   "author": "",
@@ -32,7 +34,13 @@
     "@types/bcrypt": "^5.0.0",
     "@types/jest": "^28.1.2",
     "@types/jsonwebtoken": "^8.5.8",
+    "@typescript-eslint/eslint-plugin": "^5.38.1",
+    "@typescript-eslint/parser": "^5.38.1",
+    "eslint": "^8.24.0",
+    "eslint-config-prettier": "^8.5.0",
+    "eslint-plugin-react": "^7.31.8",
     "jest": "^28.1.1",
+    "prettier": "^2.7.1",
     "sequelize-cli": "^6.4.1",
     "ts-jest": "^28.0.5"
   }
