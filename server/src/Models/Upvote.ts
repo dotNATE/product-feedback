@@ -10,7 +10,7 @@ interface UpvoteAttributes {
 // eslint-disable-next-line @typescript-eslint/no-empty-interface
 interface UpvoteCreationAttributes extends Optional<UpvoteAttributes, 'id'> {}
 
-interface UpvoteInstance
+export interface UpvoteInstance
   extends Model<UpvoteAttributes, UpvoteCreationAttributes>,
     UpvoteAttributes {
   createdAt?: Date;
