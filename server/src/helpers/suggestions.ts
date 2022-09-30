@@ -1,4 +1,5 @@
 import { Suggestion } from '../Models';
+import { SuggestionInstance } from '../Models/Suggestion';
 
 import { getOneUpvote } from './upvotes';
 
@@ -16,7 +17,7 @@ export const createNewSuggestion = async (
   category: string,
   detail: string,
   createdBy: string
-) => Suggestion.create({
+): Promise<SuggestionInstance> => Suggestion.create({
     title,
     category,
     detail,
@@ -24,14 +25,14 @@ export const createNewSuggestion = async (
     upvotes: 0,
   });
 
-export const getAllSuggestions = async () => Suggestion.findAll({
+export const getAllSuggestions = async (): Promise<Array<SuggestionInstance>> => Suggestion.findAll({
     order: [['createdAt', 'DESC']],
   });
 
 export const mapUpvoteCountToSuggestionsByUserId = async (
-  suggestions: SuggestionInterface[],
+  suggestions: SuggestionInstance[],
   userId: string
-) => {
+): Promise<Array<Promise<SuggestionInterface>>> => {
   return suggestions.map(async suggestion => {
     const { id, title, category, detail, createdBy, upvotes } = suggestion;
     let upvotedByUser = false;

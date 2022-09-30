@@ -14,7 +14,7 @@ interface SuggestionAttributes {
 interface SuggestionCreationAttributes
   extends Optional<SuggestionAttributes, 'id'> {}
 
-interface SuggestionInstance
+export interface SuggestionInstance
   extends Model<SuggestionAttributes, SuggestionCreationAttributes>,
     SuggestionAttributes {
   createdAt?: Date;
