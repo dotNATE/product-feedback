@@ -1,45 +1,46 @@
-import { DataTypes, Model, Optional } from "sequelize";
+import { DataTypes, Model, Optional } from 'sequelize';
 import { sequelize } from './sequelize';
 
 interface UpvoteAttributes {
-    id: string,
-    userId: string,
-    suggestionId: string,
+  id: string;
+  userId: string;
+  suggestionId: string;
 }
 
-interface UpvoteCreationAttributes
-    extends Optional<UpvoteAttributes, 'id'>{}
+// eslint-disable-next-line @typescript-eslint/no-empty-interface
+interface UpvoteCreationAttributes extends Optional<UpvoteAttributes, 'id'> {}
 
 interface UpvoteInstance
-    extends Model<UpvoteAttributes, UpvoteCreationAttributes>, UpvoteAttributes{
-        createdAt?: Date;
-        updatedAt?: Date;
-        deletedAt?: Date;
-    }
+  extends Model<UpvoteAttributes, UpvoteCreationAttributes>,
+    UpvoteAttributes {
+  createdAt?: Date;
+  updatedAt?: Date;
+  deletedAt?: Date;
+}
 
 const Upvote = sequelize.define<UpvoteInstance>(
-    'Upvote',
-    {
-        id: {
-            allowNull: false,
-            autoIncrement: false,
-            primaryKey: true,
-            type: DataTypes.UUID,
-            defaultValue: DataTypes.UUIDV4,
-            unique: true,
-        },
-        userId: {
-            allowNull: false,
-            type: DataTypes.UUID,
-        },
-        suggestionId: {
-            allowNull: false,
-            type: DataTypes.UUID,
-        },
+  'Upvote',
+  {
+    id: {
+      allowNull: false,
+      autoIncrement: false,
+      primaryKey: true,
+      type: DataTypes.UUID,
+      defaultValue: DataTypes.UUIDV4,
+      unique: true,
     },
-    {
-        paranoid: true,
+    userId: {
+      allowNull: false,
+      type: DataTypes.UUID,
     },
+    suggestionId: {
+      allowNull: false,
+      type: DataTypes.UUID,
+    },
+  },
+  {
+    paranoid: true,
+  }
 );
 
 export default Upvote;

@@ -1,31 +1,43 @@
 import { isAuthenticated } from '../helpers/auth';
-import { refreshUpvoteCount, getOneUpvote, createNewUpvote } from '../helpers/upvotes';
+import {
+  refreshUpvoteCount,
+  getOneUpvote,
+  createNewUpvote,
+} from '../helpers/upvotes';
 
-export const resolveAddUpvote = async (_: any, { userId, suggestionId }: any, { authToken }: any) => {
-    isAuthenticated(authToken);
+export const resolveAddUpvote = async (
+  _: any,
+  { userId, suggestionId }: any,
+  { authToken }: any
+) => {
+  isAuthenticated(authToken);
 
-    const upvote = await getOneUpvote(userId, suggestionId);
-    if (upvote) throw new Error("Upvote already exists");
+  const upvote = await getOneUpvote(userId, suggestionId);
+  if (upvote) throw new Error('Upvote already exists');
 
-    await createNewUpvote(userId, suggestionId);
+  await createNewUpvote(userId, suggestionId);
 
-    refreshUpvoteCount(suggestionId);
+  refreshUpvoteCount(suggestionId);
 
-    return { success: true, message: 'Upvote successful' };
+  return { success: true, message: 'Upvote successful' };
 };
 
-export const resolveRemoveUpvote = async (_: any, { userId, suggestionId }: any, { authToken }: any) => {
-    isAuthenticated(authToken);
+export const resolveRemoveUpvote = async (
+  _: any,
+  { userId, suggestionId }: any,
+  { authToken }: any
+) => {
+  isAuthenticated(authToken);
 
-    const upvote = await getOneUpvote(userId, suggestionId);
+  const upvote = await getOneUpvote(userId, suggestionId);
 
-    if (!upvote) {
-        throw new Error("Upvote does not exist!")
-    }
+  if (!upvote) {
+    throw new Error('Upvote does not exist!');
+  }
 
-    await upvote.destroy();
+  await upvote.destroy();
 
-    await refreshUpvoteCount(suggestionId);
+  await refreshUpvoteCount(suggestionId);
 
-    return { success: true, message: 'Upvote removed successfully' };
+  return { success: true, message: 'Upvote removed successfully' };
 };
