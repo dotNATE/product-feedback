@@ -17,7 +17,8 @@ export const createNewSuggestion = async (
   category: string,
   detail: string,
   createdBy: string
-): Promise<SuggestionInstance> => Suggestion.create({
+): Promise<SuggestionInstance> =>
+  Suggestion.create({
     title,
     category,
     detail,
@@ -25,7 +26,8 @@ export const createNewSuggestion = async (
     upvotes: 0,
   });
 
-export const getAllSuggestions = async (): Promise<Array<SuggestionInstance>> => Suggestion.findAll({
+export const getAllSuggestions = async (): Promise<Array<SuggestionInstance>> =>
+  Suggestion.findAll({
     order: [['createdAt', 'DESC']],
   });
 

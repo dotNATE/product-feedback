@@ -13,7 +13,8 @@ export const generateAccessToken = (userId: string): string => {
   return jwt.sign({ userId }, secret, { expiresIn: expiry });
 };
 
-export const hashPassword = async (password: string): Promise<string> => bcrypt.hash(password, Number(process.env.BCRYPT_ROUNDS));
+export const hashPassword = async (password: string): Promise<string> =>
+  bcrypt.hash(password, Number(process.env.BCRYPT_ROUNDS));
 
 export const isAuthenticated = (authToken: string): void => {
   jwt.verify(
