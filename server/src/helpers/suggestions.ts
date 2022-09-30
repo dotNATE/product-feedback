@@ -16,21 +16,17 @@ export const createNewSuggestion = async (
   category: string,
   detail: string,
   createdBy: string
-) => {
-  return await Suggestion.create({
+) => Suggestion.create({
     title,
     category,
     detail,
     createdBy,
     upvotes: 0,
   });
-};
 
-export const getAllSuggestions = async () => {
-  return await Suggestion.findAll({
+export const getAllSuggestions = async () => Suggestion.findAll({
     order: [['createdAt', 'DESC']],
   });
-};
 
 export const mapUpvoteCountToSuggestionsByUserId = async (
   suggestions: SuggestionInterface[],
