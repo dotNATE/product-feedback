@@ -20,29 +20,38 @@ export const createNewUser = async (
   });
 };
 
-export const deleteUserById = async (id: string): Promise<Number> => User.destroy({
+export const deleteUserById = async (id: string): Promise<Number> =>
+  User.destroy({
     where: {
       id,
     },
   });
 
-export const getAllUsers = async (): Promise<Array<UserInstance>> => User.findAll({
+export const getAllUsers = async (): Promise<Array<UserInstance>> =>
+  User.findAll({
     order: [['createdAt', 'DESC']],
   });
 
-export const getUserByEmail = async (email: string): Promise<UserInstance | null> => User.findOne({
+export const getUserByEmail = async (
+  email: string
+): Promise<UserInstance | null> =>
+  User.findOne({
     where: {
       email,
     },
   });
 
-export const getUserById = async (id: string): Promise<UserInstance | null> => User.findOne({
+export const getUserById = async (id: string): Promise<UserInstance | null> =>
+  User.findOne({
     where: {
       id,
     },
   });
 
-export const getUserByUsername = async (username: string): Promise<UserInstance | null> => User.findOne({
+export const getUserByUsername = async (
+  username: string
+): Promise<UserInstance | null> =>
+  User.findOne({
     where: {
       username,
     },
