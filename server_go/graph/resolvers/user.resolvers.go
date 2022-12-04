@@ -7,28 +7,17 @@ import (
 	"context"
 	"fmt"
 
+	"github.com/dotNate/product_feedback_server/graph/customTypes"
 	"github.com/dotNate/product_feedback_server/graph/generated"
-	"github.com/dotNate/product_feedback_server/graph/model"
-	uuid "github.com/satori/go.uuid"
 )
 
 // CreateUser is the resolver for the createUser field.
-func (r *mutationResolver) CreateUser(ctx context.Context, input *model.UserInput) (*model.User, error) {
-	id := uuid.NewV4().String()
-	var user model.User
-	user.ID = id
-
-	user.FirstName = input.FirstName
-	user.LastName = input.LastName
-	user.Username = input.Username
-	user.Email = input.Email
-	user.Password = input.Password
-
-	return &user, nil
+func (r *mutationResolver) CreateUser(ctx context.Context, input *customTypes.UserInput) (*customTypes.User, error) {
+	panic(fmt.Errorf("not implemented: CreateUser - createUser"))
 }
 
 // GetAllUsers is the resolver for the getAllUsers field.
-func (r *queryResolver) GetAllUsers(ctx context.Context) ([]*model.User, error) {
+func (r *queryResolver) GetAllUsers(ctx context.Context) ([]*customTypes.User, error) {
 	panic(fmt.Errorf("not implemented: GetAllUsers - getAllUsers"))
 }
 
