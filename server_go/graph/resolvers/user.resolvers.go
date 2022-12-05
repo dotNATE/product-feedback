@@ -7,13 +7,30 @@ import (
 	"context"
 	"fmt"
 
+	"github.com/dotNate/product_feedback_server/graph/common"
 	"github.com/dotNate/product_feedback_server/graph/customTypes"
 	"github.com/dotNate/product_feedback_server/graph/generated"
+	// uuid "github.com/satori/go.uuid"
 )
 
 // CreateUser is the resolver for the createUser field.
 func (r *mutationResolver) CreateUser(ctx context.Context, input *customTypes.UserInput) (*customTypes.User, error) {
-	panic(fmt.Errorf("not implemented: CreateUser - createUser"))
+	context := common.GetContext(ctx)
+	user := &customTypes.User{
+		ID:        "1",
+		FirstName: input.FirstName,
+		LastName:  input.LastName,
+		Email:     input.Email,
+		Username:  input.Username,
+		Password:  input.Password,
+	}
+
+	err := context.Database.Create(&user).Error
+	if err != nil {
+		return nil, err
+	}
+
+	return user, nil
 }
 
 // GetAllUsers is the resolver for the getAllUsers field.
