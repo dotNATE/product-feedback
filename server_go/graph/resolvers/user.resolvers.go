@@ -5,24 +5,37 @@ package graph
 
 import (
 	"context"
+	"errors"
 	"fmt"
 
 	"github.com/dotNate/product_feedback_server/graph/common"
 	"github.com/dotNate/product_feedback_server/graph/customTypes"
 	"github.com/dotNate/product_feedback_server/graph/generated"
-	// uuid "github.com/satori/go.uuid"
+	uuid "github.com/satori/go.uuid"
+	"gorm.io/gorm"
 )
 
 // CreateUser is the resolver for the createUser field.
 func (r *mutationResolver) CreateUser(ctx context.Context, input *customTypes.UserInput) (*customTypes.User, error) {
 	context := common.GetContext(ctx)
+
 	user := &customTypes.User{
-		ID:        "1",
+		ID:        uuid.NewV4().String(),
 		FirstName: input.FirstName,
 		LastName:  input.LastName,
 		Email:     input.Email,
 		Username:  input.Username,
 		Password:  input.Password,
+	}
+
+	existingUser := context.Database.Where("email = ?", input.Email).Take(&customTypes.User{})
+	if !errors.Is(existingUser.Error, gorm.ErrRecordNotFound) {
+		return nil, fmt.Errorf("email address already in use")
+	}
+
+	existingUser = context.Database.Where("username = ?", input.Username).Take(&customTypes.User{})
+	if !errors.Is(existingUser.Error, gorm.ErrRecordNotFound) {
+		return nil, fmt.Errorf("username already in use")
 	}
 
 	err := context.Database.Create(&user).Error
@@ -35,7 +48,12 @@ func (r *mutationResolver) CreateUser(ctx context.Context, input *customTypes.Us
 
 // GetAllUsers is the resolver for the getAllUsers field.
 func (r *queryResolver) GetAllUsers(ctx context.Context) ([]*customTypes.User, error) {
-	panic(fmt.Errorf("not implemented: GetAllUsers - getAllUsers"))
+	context := common.GetContext(ctx)
+	users := []*customTypes.User{}
+
+	context.Database.Find(&users)
+
+	return users, nil
 }
 
 // Mutation returns generated.MutationResolver implementation.
